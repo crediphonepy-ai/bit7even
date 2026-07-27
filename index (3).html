@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIT7EVEN — Infraestructura Eléctrica & Electromecánica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0A0C0D;
+    --panel:#14181B;
+    --panel-2:#1B2024;
+    --steel:#3A4048;
+    --steel-dim:#262B2F;
+    --copper:#B8672B;
+    --copper-bright:#D98A47;
+    --amber:#F2B84B;
+    --text:#E9E7E1;
+    --text-dim:#8A9096;
+    --line: rgba(233,231,225,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--copper);color:var(--void);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* ---- conduit line (signature element) ---- */
+  #conduit{
+    position:fixed; left:0; top:0; width:100%; height:100%;
+    pointer-events:none; z-index:1;
+  }
+  #conduit svg{width:100%;height:100%;}
+  #conduit path{
+    fill:none; stroke:var(--steel); stroke-width:1.5;
+  }
+  #conduit .charge{
+    fill:none; stroke:var(--amber); stroke-width:2;
+    stroke-dasharray: 6 3000;
+    filter: drop-shadow(0 0 4px var(--amber));
+  }
+
+  header{
+    position:fixed; top:0; left:0; width:100%; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 6vw;
+    background:linear-gradient(to bottom, rgba(10,12,13,0.9), transparent);
+  }
+  header img{height:28px; filter:brightness(0) invert(1);}
+  .mainnav{display:none; gap:32px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.05em;}
+  .mainnav a{color:var(--text-dim); text-decoration:none; transition:color .2s ease;}
+  .mainnav a:hover{color:var(--text);}
+  .nav-cta{display:none; padding:11px 20px; font-size:11px;}
+  @media(min-width:900px){ .mainnav{display:flex;} .nav-cta{display:inline-block;} }
+
+  section{position:relative; z-index:2; padding:0 6vw;}
+
+  /* ---- HERO ---- */
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end;
+    position:relative; padding-bottom:0; overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-bg{position:absolute; inset:0; z-index:0; background:#0A0C0D;}
+  .hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0;}
+  .hero-video.loaded{opacity:1; transition:opacity 1s ease;}
+  .hero-fallback{width:100%; height:100%; display:block;}
+  .hero-scrim{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(10,12,13,0.55) 0%, rgba(10,12,13,0.35) 40%, rgba(10,12,13,0.95) 100%);
+  }
+  .hero-content{position:relative; z-index:2; padding-top:140px;}
+  .hero h1{
+    font-size:clamp(2.1rem, 6.5vw, 4.6rem); line-height:1.02; font-weight:600;
+    max-width:16ch;
+  }
+  .hero h1 em{font-style:normal; color:#4FA8FF;}
+  .hero p{
+    margin-top:24px; max-width:56ch; font-size:1.05rem; color:var(--text-dim); font-weight:300; line-height:1.6;
+  }
+  .hero .cta-row{margin-top:36px; display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .tag-row{margin-top:36px; display:flex; flex-wrap:wrap; gap:10px;}
+  .tag-row span{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);
+    border:1px solid var(--line); padding:8px 14px; letter-spacing:0.03em;
+  }
+  .stat-band{
+    position:relative; z-index:2; margin-top:50px;
+    display:grid; grid-template-columns:repeat(2,1fr); gap:24px;
+    border-top:1px solid var(--line); padding:28px 0 40px;
+  }
+  .stat-band div{display:flex; flex-direction:column; gap:4px;}
+  .stat-band strong{font-family:'Oswald',sans-serif; font-size:clamp(1.5rem,4vw,2.2rem); color:#4FA8FF; font-weight:600;}
+  .stat-band span{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim); letter-spacing:0.04em;}
+  @media(min-width:700px){ .stat-band{grid-template-columns:repeat(4,1fr);} }
+  .btn{
+    font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em;
+    padding:15px 30px; border:1px solid var(--copper); color:var(--text);
+    background:transparent; cursor:pointer; text-decoration:none; display:inline-block;
+    transition:all .25s ease; position:relative;
+  }
+  .btn:hover{background:var(--copper); color:var(--void); border-color:var(--copper);}
+  .btn.ghost{border-color:var(--steel); color:var(--text-dim);}
+  .btn.ghost:hover{border-color:var(--text-dim); background:transparent; color:var(--text);}
+
+  .voltmeter{
+    position:absolute; right:6vw; bottom:60px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);
+    text-align:right; display:none;
+  }
+  @media(min-width:900px){.voltmeter{display:block;}}
+  .voltmeter .num{font-size:34px; color:var(--copper-bright); letter-spacing:0.02em;}
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0; transform:translateY(36px); transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---- section label ---- */
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:56px; border-top:1px solid var(--line); padding-top:20px;}
+  .section-head .idx{font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:13px;}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.6rem); font-weight:500;}
+
+  /* ---- ABOUT / NAMEPLATE ---- */
+  .about{padding-top:140px; padding-bottom:100px;}
+  .nameplate{
+    background:var(--panel); border:1px solid var(--line); padding:36px 40px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:28px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .nameplate div span{display:block; color:var(--text-dim); font-size:11px; letter-spacing:0.1em; margin-bottom:6px;}
+  .nameplate div strong{font-size:15px; font-weight:500; color:var(--text);}
+  .about-text{max-width:60ch; margin-top:40px; font-size:1.15rem; color:var(--text-dim); line-height:1.7;}
+  .about-text strong{color:var(--text); font-weight:500;}
+
+  /* ---- SERVICES ---- */
+  .services{padding:120px 0;}
+  .svc-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .svc-card{background:var(--void); padding:36px 30px; transition:background .3s ease;}
+  .svc-card:hover{background:var(--panel);}
+  .svc-card .n{font-family:'JetBrains Mono',monospace; color:var(--copper); font-size:12px; margin-bottom:20px; display:block;}
+  .svc-card h3{font-size:1.3rem; font-weight:500; margin-bottom:14px; text-transform:none; letter-spacing:0;}
+  .svc-card p{color:var(--text-dim); font-size:0.95rem; line-height:1.6;}
+
+  /* ---- PROJECTS ---- */
+  .projects{padding:120px 0;}
+  .proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;}
+  .proj-card{
+    border:1px solid var(--line); background:var(--panel); overflow:hidden;
+  }
+  .proj-visual{
+    height:200px; position:relative; background:
+      repeating-linear-gradient(45deg, var(--panel-2) 0 2px, transparent 2px 14px),
+      var(--panel-2);
+    display:flex; align-items:center; justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .proj-visual svg{width:64px;height:64px; opacity:0.5;}
+  .proj-body{padding:26px 28px;}
+  .proj-body .status{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--amber); letter-spacing:0.1em; margin-bottom:10px; display:block;}
+  .proj-body h3{font-size:1.15rem; font-weight:500; text-transform:none; letter-spacing:0; margin-bottom:8px;}
+  .proj-body p{color:var(--text-dim); font-size:0.9rem; line-height:1.6;}
+  .proj-note{
+    margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-dim);
+    border-left:2px solid var(--copper); padding-left:16px;
+  }
+
+  /* ---- LOCATION ---- */
+  .location{padding:120px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:1fr; gap:40px;}
+  @media(min-width:800px){.location{grid-template-columns:1fr 1fr;}}
+  .loc-info p{color:var(--text-dim); font-size:1rem; line-height:1.8;}
+  .loc-info .addr{font-family:'JetBrains Mono',monospace; color:var(--text); font-size:1.05rem; margin:18px 0;}
+  .loc-map{border:1px solid var(--line); min-height:260px; background:var(--panel); position:relative; overflow:hidden;}
+  .loc-map svg{width:100%;height:100%;}
+
+  /* ---- CONTACT FORM ---- */
+  .contact{padding:120px 0 160px;}
+  .form-wrap{display:grid; grid-template-columns:1fr; gap:60px;}
+  @media(min-width:900px){.form-wrap{grid-template-columns:0.8fr 1.2fr;}}
+  .form-side h2{font-size:clamp(1.8rem,4vw,2.6rem); font-weight:500; margin-bottom:20px;}
+  .form-side p{color:var(--text-dim); max-width:40ch; line-height:1.7;}
+  form{display:flex; flex-direction:column; gap:22px;}
+  .field{position:relative;}
+  .field label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);
+    letter-spacing:0.1em; margin-bottom:8px;
+  }
+  .field input, .field textarea{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--steel);
+    color:var(--text); font-family:'Inter',sans-serif; font-size:1rem; padding:10px 2px;
+    outline:none; transition:border-color .25s ease;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--copper-bright);}
+  .field textarea{resize:vertical; min-height:90px;}
+  .submit-row{margin-top:10px; display:flex; align-items:center; gap:20px;}
+  #formMsg{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--amber);}
+
+  footer{
+    border-top:1px solid var(--line); padding:36px 6vw; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:12px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .reveal{transition:none; opacity:1; transform:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---- MOBILE FIRST BASE (small screens) ---- */
+  header{padding:16px 5vw;}
+  header img{height:20px;}
+  header .tag{display:none;}
+  @media(min-width:640px){ header .tag{display:block;} header img{height:24px;} }
+
+  section{padding-left:6vw; padding-right:6vw;}
+
+  .hero{min-height:100svh; padding-top:90px; padding-bottom:60px;}
+  .hero h1{font-size:clamp(2.1rem, 9vw, 5.5rem); max-width:100%;}
+  .hero p{font-size:1rem; max-width:100%;}
+  .hero .cta-row{width:100%;}
+  .hero .cta-row .btn{flex:1 1 auto; text-align:center;}
+  .voltmeter{position:static; margin-top:40px; text-align:left;}
+
+  .about{padding-top:110px; padding-bottom:70px;}
+  .nameplate{padding:24px 20px; grid-template-columns:repeat(2,1fr); gap:20px;}
+  .about-text{font-size:1rem; margin-top:32px;}
+
+  .services, .projects, .location, .contact{padding-top:80px; padding-bottom:80px;}
+  .section-head{margin-bottom:36px;}
+  .section-head h2{font-size:clamp(1.6rem,7vw,2.6rem);}
+
+  .svc-card{padding:28px 22px;}
+  .proj-visual{height:150px;}
+  .form-wrap{gap:40px;}
+  footer{padding:28px 5vw; flex-direction:column; align-items:flex-start;}
+  #conduit path{stroke-width:1;}
+
+  @media(min-width:900px){
+    .hero{padding-top:0; padding-bottom:0;}
+    .voltmeter{position:absolute; text-align:right; margin-top:0;}
+    .about{padding-top:140px; padding-bottom:100px;}
+    .services, .projects, .contact{padding-top:120px; padding-bottom:120px;}
+    .location{padding-top:120px; padding-bottom:120px;}
+    .nameplate{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+  }
+</style>
+</head>
+<body>
+
+<div id="conduit"><svg viewBox="0 0 100 3000" preserveAspectRatio="none">
+  <path id="basePath" d="M 8,0 L 8,300 L 92,340 L 92,700 L 8,740 L 8,1100 L 92,1140 L 92,1500 L 8,1540 L 8,1900 L 92,1940 L 92,2300 L 8,2340 L 8,3000"/>
+  <path id="chargePath" class="charge" d="M 8,0 L 8,300 L 92,340 L 92,700 L 8,740 L 8,1100 L 92,1140 L 92,1500 L 8,1540 L 8,1900 L 92,1940 L 92,2300 L 8,2340 L 8,3000"/>
+</svg></div>
+
+<header>
+  <img src="logo.png" alt="BIT7EVEN">
+  <nav class="mainnav">
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Soluciones</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="btn nav-cta">Solicitar consulta técnica</a>
+</header>
+
+<section class="hero" id="inicio">
+  <!-- CAPA 1: video de fondo. Reemplazar src por el video real cuando esté listo -->
+  <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline poster="">
+      <source src="hero-bg.mp4" type="video/mp4">
+    </video>
+    <svg class="hero-fallback" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a0f16"/>
+          <stop offset="60%" stop-color="#0a0c0d"/>
+          <stop offset="100%" stop-color="#0A0C0D"/>
+        </linearGradient>
+        <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#4FA8FF" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#4FA8FF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <g stroke="#2A323A" stroke-width="2" fill="none" opacity="0.8">
+        <path d="M120,900 L180,500 L240,900 M150,600 L210,600 M140,680 L220,680"/>
+        <path d="M1420,900 L1480,470 L1540,900 M1450,570 L1510,570 M1440,660 L1520,660"/>
+        <path d="M950,900 L1010,420 L1070,900 M980,530 L1040,530 M970,620 L1050,620"/>
+      </g>
+      <path d="M0,540 L1600,560" stroke="url(#glow)" stroke-width="1.5"/>
+      <path d="M0,600 L1600,615" stroke="url(#glow)" stroke-width="1.5" opacity="0.6"/>
+      <g fill="#161B1F" stroke="#2A323A" stroke-width="1.5">
+        <rect x="260" y="700" width="180" height="140"/>
+        <rect x="470" y="660" width="140" height="180"/>
+        <rect x="640" y="720" width="220" height="120"/>
+      </g>
+      <g fill="#12161A" stroke="#3A4048" stroke-width="1.5">
+        <rect x="1120" y="560" width="260" height="280"/>
+        <g stroke="#4FA8FF" stroke-width="1" opacity="0.5">
+          <line x1="1140" y1="600" x2="1140" y2="820"/>
+          <line x1="1180" y1="580" x2="1180" y2="820"/>
+          <line x1="1220" y1="580" x2="1220" y2="820"/>
+          <line x1="1260" y1="580" x2="1260" y2="820"/>
+          <line x1="1300" y1="580" x2="1300" y2="820"/>
+          <line x1="1340" y1="580" x2="1340" y2="820"/>
+        </g>
+      </g>
+      <g fill="#14181B" stroke="#4FA8FF" stroke-width="1" opacity="0.85">
+        <rect x="900" y="770" width="90" height="70"/>
+        <rect x="1000" y="770" width="90" height="70"/>
+        <circle cx="945" cy="805" r="3" fill="#4FA8FF"/>
+        <circle cx="1045" cy="805" r="3" fill="#4FA8FF"/>
+      </g>
+      <g fill="#F2B84B" opacity="0.9">
+        <circle cx="180" cy="500" r="3"/><circle cx="1480" cy="470" r="3"/><circle cx="1010" cy="420" r="3"/>
+      </g>
+    </svg>
+  </div>
+  <!-- CAPA 2: overlay/degradado para legibilidad -->
+  <div class="hero-scrim"></div>
+  <!-- CAPA 3: interfaz (logo ya está en el header fijo, acá va título/subtítulo/botones) -->
+  <div class="hero-content">
+    <h1>Infraestructura energética para la <em>era de la inteligencia artificial</em>.</h1>
+    <p>Diseñamos e implementamos infraestructura eléctrica de alta potencia para centros de datos, inteligencia artificial, sistemas BESS, computación de alto rendimiento y proyectos industriales de misión crítica.</p>
+    <div class="cta-row">
+      <a href="#contacto" class="btn">Solicitar consulta</a>
+      <a href="#proyectos" class="btn ghost">Explorar proyectos</a>
+    </div>
+    <div class="tag-row">
+      <span>⚡ Subestaciones eléctricas</span>
+      <span>🧠 Inteligencia artificial</span>
+      <span>🔋 Energy Storage (BESS)</span>
+      <span>🖥 Data Centers</span>
+      <span>⚙ High Performance Computing</span>
+      <span>🌐 Infraestructura crítica</span>
+    </div>
+  </div>
+  <div class="stat-band">
+    <div><strong>120+</strong><span>Proyectos ejecutados</span></div>
+    <div><strong>250+ MW</strong><span>Infraestructura implementada</span></div>
+    <div><strong>10+</strong><span>Años de experiencia</span></div>
+    <div><strong>100%</strong><span>Ingeniería especializada</span></div>
+  </div>
+</section>
+
+<section class="about" id="nosotros">
+  <div class="nameplate reveal">
+    <div><span>RAZÓN SOCIAL</span><strong>BIT7EVEN S.A.</strong></div>
+    <div><span>RUC</span><strong>80132507-2</strong></div>
+    <div><span>SEDE</span><strong>San Juan XXIII, Paraguay</strong></div>
+    <div><span>OPERACIÓN</span><strong>Yguazú · Alto Paraná</strong></div>
+  </div>
+  <p class="about-text reveal">
+    <strong>BIT7EVEN</strong> ejecuta proyectos de infraestructura eléctrica y electromecánica de alta exigencia: desde el tendido y montaje de estaciones y subestaciones eléctricas hasta el soporte técnico integral de centros de datos y granjas de criptominería. Cada obra se planifica para operar de forma continua, bajo carga real y sin margen de error.
+  </p>
+</section>
+
+<section class="services" id="servicios">
+  <div class="section-head reveal">
+    <span class="idx">ÁREAS</span>
+    <h2>En qué trabajamos</h2>
+  </div>
+  <div class="svc-grid reveal">
+    <div class="svc-card">
+      <span class="n">01</span>
+      <h3>Obras eléctricas</h3>
+      <p>Estaciones y subestaciones eléctricas: diseño, montaje y puesta en marcha para cargas industriales de alta demanda.</p>
+    </div>
+    <div class="svc-card">
+      <span class="n">02</span>
+      <h3>Electromecánica</h3>
+      <p>Instalación y mantenimiento de sistemas electromecánicos para instalaciones que operan 24/7 sin interrupciones.</p>
+    </div>
+    <div class="svc-card">
+      <span class="n">03</span>
+      <h3>Redes de TI</h3>
+      <p>Infraestructura de redes para centros de datos, con foco en continuidad, refrigeración y densidad energética.</p>
+    </div>
+    <div class="svc-card">
+      <span class="n">04</span>
+      <h3>Granjas de minería</h3>
+      <p>Soporte técnico especializado para granjas de minería digital: desde el suministro eléctrico hasta el mantenimiento del sitio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="proyectos">
+  <div class="section-head reveal">
+    <span class="idx">TRABAJOS</span>
+    <h2>Proyectos</h2>
+  </div>
+  <div class="proj-grid reveal">
+    <div class="proj-card">
+      <div class="proj-visual"><svg viewBox="0 0 24 24" fill="none" stroke="#B8672B" stroke-width="1.2"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6M4 9h16"/></svg></div>
+      <div class="proj-body">
+        <span class="status">● EN OPERACIÓN</span>
+        <h3>Subestación — Yguazú, Alto Paraná</h3>
+        <p>Espacio reservado para el proyecto. Reemplazar con fotos, capacidad instalada y detalle técnico.</p>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-visual"><svg viewBox="0 0 24 24" fill="none" stroke="#B8672B" stroke-width="1.2"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M7 8h4M7 12h10M7 16h7"/></svg></div>
+      <div class="proj-body">
+        <span class="status">● EN OPERACIÓN</span>
+        <h3>Centro de datos — soporte de infraestructura</h3>
+        <p>Espacio reservado para el proyecto. Reemplazar con fotos, capacidad instalada y detalle técnico.</p>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-visual"><svg viewBox="0 0 24 24" fill="none" stroke="#B8672B" stroke-width="1.2"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+      <div class="proj-body">
+        <span class="status">● EN OPERACIÓN</span>
+        <h3>Granja de minería — obra electromecánica</h3>
+        <p>Espacio reservado para el proyecto. Reemplazar con fotos, capacidad instalada y detalle técnico.</p>
+      </div>
+    </div>
+  </div>
+  <p class="proj-note reveal">Mandame fotos y datos reales de cada obra (ubicación, capacidad, fecha) y reemplazamos estas fichas por las definitivas.</p>
+</section>
+
+<section class="location">
+  <div class="loc-info reveal">
+    <div class="section-head" style="border-top:none;padding-top:0;margin-bottom:24px;">
+      <span class="idx">SEDE</span>
+      <h2>Oficina corporativa</h2>
+    </div>
+    <p>Oficina central en Paraguay, con operación técnica en Yguazú, Alto Paraná — zona de mayor concentración de proyectos de infraestructura digital del país.</p>
+    <div class="addr">San Juan XXIII · BIT7EVEN Oficina Corporativa</div>
+  </div>
+  <div class="loc-map reveal">
+    <svg viewBox="0 0 300 260"><g stroke="#3A4048" stroke-width="1" fill="none" opacity="0.6">
+      <path d="M0,40 L300,60"/><path d="M0,120 L300,110"/><path d="M40,0 L20,260"/><path d="M220,0 L260,260"/>
+    </g>
+    <circle cx="160" cy="90" r="6" fill="#F2B84B"/>
+    <circle cx="160" cy="90" r="14" fill="none" stroke="#F2B84B" stroke-width="1" opacity="0.5"/>
+    <text x="20" y="200" fill="#8A9096" font-family="JetBrains Mono, monospace" font-size="10">SAN JUAN XXIII</text>
+    </svg>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="form-wrap">
+    <div class="form-side reveal">
+      <div class="section-head" style="border-top:none;padding-top:0;margin-bottom:0;">
+        <span class="idx">CONTACTO</span>
+      </div>
+      <h2>Hablemos de tu proyecto</h2>
+      <p>Contanos qué necesitás — obra eléctrica, electromecánica o soporte de infraestructura — y te respondemos con una propuesta.</p>
+    </div>
+    <form class="reveal" id="contactForm">
+      <div class="field">
+        <label for="nombre">NOMBRE</label>
+        <input type="text" id="nombre" required>
+      </div>
+      <div class="field">
+        <label for="email">EMAIL</label>
+        <input type="email" id="email" required>
+      </div>
+      <div class="field">
+        <label for="tel">TELÉFONO</label>
+        <input type="tel" id="tel">
+      </div>
+      <div class="field">
+        <label for="msg">DETALLE DEL PROYECTO</label>
+        <textarea id="msg" required></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn">Enviar solicitud</button>
+        <span id="formMsg"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>BIT7EVEN S.A. — RUC 80132507-2</span>
+  <span>© 2026 · Paraguay</span>
+</footer>
+
+<script>
+  // Capa video del hero: si carga bien el mp4 real, lo muestra; si no existe todavía, se queda el fallback SVG
+  const heroVideo = document.querySelector('.hero-video');
+  if(heroVideo){
+    heroVideo.addEventListener('canplay', ()=> heroVideo.classList.add('loaded'));
+    heroVideo.addEventListener('error', ()=> heroVideo.style.display='none');
+  }
+
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  items.forEach(i=>io.observe(i));
+
+  // Conduit charge animation tied to scroll
+  const chargePath = document.getElementById('chargePath');
+  const len = chargePath.getTotalLength();
+  chargePath.style.strokeDasharray = `${len*0.06} ${len}`;
+  function onScroll(){
+    const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    const offset = len - (scrollPct * len * 1.3);
+    chargePath.style.strokeDashoffset = offset;
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  // Fake form submit (no backend connected yet)
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('formMsg').textContent = 'Solicitud registrada. (Conectar a email/CRM real)';
+  });
+</script>
+
+</body>
+</html>
