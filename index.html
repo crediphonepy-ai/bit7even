@@ -34,19 +34,14 @@
     padding:16px 5vw;
     background:linear-gradient(to bottom, rgba(5,7,8,0.92), transparent);
   }
-  header .logo img{height:26px;}
+  header .logo img{height:42px;}
   nav.desktop-nav{display:none; gap:30px; font-size:14px; font-weight:600;}
   nav.desktop-nav a{text-decoration:none; color:var(--text-dim); transition:color .2s;}
   nav.desktop-nav a:hover{color:var(--text);}
-  .nav-cta{
-    display:none; align-items:center; gap:8px; padding:11px 20px; border-radius:999px;
-    border:1px solid var(--cyan); font-size:13px; font-weight:700; text-decoration:none;
-  }
   .hamburger{display:flex; flex-direction:column; gap:5px; width:32px; height:32px; justify-content:center; background:none; border:none; cursor:pointer;}
   .hamburger span{display:block; height:2px; width:100%; background:var(--text);}
   @media(min-width:960px){
     nav.desktop-nav{display:flex;}
-    .nav-cta{display:inline-flex;}
     .hamburger{display:none;}
   }
 
@@ -89,7 +84,7 @@
   .hero-content{position:relative; z-index:2; padding:150px 6vw 0;}
   .hero-content h1{font-size:clamp(2.1rem, 8vw, 4.6rem); max-width:16ch;}
   .hero-content h1 .accent{background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .hero-content p{margin-top:20px; max-width:52ch; color:var(--text-dim); font-size:1.02rem; line-height:1.65; font-weight:500;}
+  .hero-content p{margin-top:20px; max-width:52ch; color:#D5DADD; font-size:1.02rem; line-height:1.65; font-weight:500; text-shadow: 0 2px 12px rgba(0,0,0,0.55);}
   .hero-content .cta-row{margin-top:32px; display:flex; flex-direction:column; gap:14px;}
   .hero-content .cta-row .btn{width:100%;}
   @media(min-width:640px){ .hero-content .cta-row{flex-direction:row;} .hero-content .cta-row .btn{width:auto;} }
@@ -139,7 +134,7 @@
     background:var(--panel);
   }
 
-  /* ---------- PROYECTOS (Novek-style photo cards) ---------- */
+  /* ---------- PROYECTOS ---------- */
   .projects{padding-top:80px; padding-bottom:80px;}
   .proj-grid{margin-top:36px; display:flex; flex-direction:column; gap:20px;}
   .proj-card{position:relative; border-radius:18px; overflow:hidden; aspect-ratio:4/3; background:var(--panel); border:1px solid var(--line);}
@@ -191,7 +186,7 @@
   /* ---------- FOOTER ---------- */
   footer{margin-top:20px; background:var(--bg-alt); border-top:1px solid var(--line); padding:60px 6vw 30px;}
   .foot-grid{display:grid; grid-template-columns:1fr; gap:36px;}
-  .foot-brand img{height:24px; margin-bottom:14px;}
+  .foot-brand img{height:48px; margin-bottom:14px;}
   .foot-brand p{color:var(--text-dim); font-size:0.9rem; line-height:1.6; font-weight:500; max-width:34ch;}
   .foot-col h4{font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:14px;}
   .foot-col a{display:block; color:var(--text-dim); text-decoration:none; font-size:0.92rem; font-weight:600; padding:6px 0;}
@@ -213,7 +208,6 @@
     <a href="#proyectos">Proyectos</a>
     <a href="#contacto">Contacto</a>
   </nav>
-  <a href="#contacto" class="btn btn-ghost nav-cta">Solicitar consulta</a>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menú"><span></span><span></span><span></span></button>
 </header>
 
@@ -235,8 +229,8 @@
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <h1>Infraestructura energética para la <span class="accent">era de la inteligencia artificial</span></h1>
-    <p>Diseñamos e implementamos infraestructura eléctrica de alta potencia para centros de datos, sistemas de almacenamiento de energía y proyectos industriales de misión crítica en Paraguay.</p>
+    <h1>Infraestructura Energética para la <span class="accent">Era de la Inteligencia Artificial</span></h1>
+    <p>Diseñamos e implementamos infraestructura energética, sistemas de refrigeración (cooling) e infraestructura crítica para centros de datos, inteligencia artificial y proyectos de misión crítica.</p>
     <div class="cta-row">
       <a href="#contacto" class="btn btn-primary">⚡ Solicitar consulta técnica</a>
       <a href="#proyectos" class="btn btn-ghost">👁 Ver proyectos</a>
@@ -350,9 +344,9 @@
     <div class="contact-info reveal">
       <p>Contanos qué necesitás — obra eléctrica, electromecánica o soporte de infraestructura — y te respondemos con una propuesta.</p>
       <div class="rows">
-        <div class="row"><span class="ic">📍</span> Yguazú, Alto Paraná, Paraguay</div>
+        <div class="row"><span class="ic">📍</span> Carlos Abdala 1270 c/ Ave. San Martín, Asunción, Paraguay</div>
         <div class="row"><span class="ic">✉</span> contacto@bit7even.com</div>
-        <div class="row"><span class="ic">📞</span> +595 000 000000</div>
+        <div class="row"><span class="ic">📞</span> +595 21 663477</div>
       </div>
     </div>
     <form class="reveal" id="contactForm">
@@ -386,12 +380,12 @@
     </div>
     <div class="foot-col">
       <h4>Contacto</h4>
-      <a href="#">Yguazú, Alto Paraná, Paraguay</a>
+      <a href="#">Carlos Abdala 1270 c/ Ave. San Martín, Asunción, Paraguay</a>
       <a href="#">contacto@bit7even.com</a>
-      <a href="#">+595 000 000000</a>
+      <a href="#">+595 21 663477</a>
     </div>
   </div>
-  <div class="foot-bottom">© 2026 BIT7EVEN S.A. — RUC 80132507-2. Todos los derechos reservados.</div>
+  <div class="foot-bottom">© 2026 BIT7EVEN S.A. Todos los derechos reservados.</div>
 </footer>
 
 <script>
