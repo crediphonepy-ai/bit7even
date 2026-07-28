@@ -196,6 +196,10 @@
   .foot-bottom{margin-top:44px; padding-top:24px; border-top:1px solid var(--line); text-align:center; color:var(--text-dim); font-size:0.8rem; font-weight:500;}
   @media(min-width:800px){ .foot-grid{grid-template-columns:1.4fr 1fr 1fr;} }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init("IVG0NEr0OaZPtY3-7");
+</script>
 </head>
 <body>
 
@@ -409,10 +413,32 @@
   hb.addEventListener('click', ()=> menu.classList.toggle('open'));
   menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menu.classList.remove('open')));
 
-  // contact form (no backend yet)
   document.getElementById('contactForm').addEventListener('submit', function(e){
     e.preventDefault();
-    document.getElementById('formMsg').textContent = 'Mensaje registrado. (Conectar a email/CRM real)';
+    const btn = e.target.querySelector('button[type="submit"]');
+    const msg = document.getElementById('formMsg');
+    btn.disabled = true;
+    msg.textContent = 'Enviando...';
+
+    const templateParams = {
+      nombre: document.getElementById('nombre').value,
+      email: document.getElementById('email').value,
+      tel: document.getElementById('tel').value,
+      msg: document.getElementById('msg').value
+    };
+
+    emailjs.send('service_9ynutxi', 'f78ig7l', templateParams)
+      .then(function(){
+        msg.textContent = '¡Mensaje enviado! Te responderemos a la brevedad.';
+        e.target.reset();
+      })
+      .catch(function(error){
+        msg.textContent = 'Hubo un error al enviar. Intentá de nuevo o escribinos directo.';
+        console.error(error);
+      })
+      .finally(function(){
+        btn.disabled = false;
+      });
   });
 </script>
 
