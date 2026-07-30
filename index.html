@@ -250,7 +250,28 @@
   @media(min-width:900px){ .contact-wrap{grid-template-columns:0.9fr 1.1fr;} }
 
   /* ---------- FOOTER ---------- */
-  footer{margin-top:20px; background:var(--bg-alt); border-top:1px solid var(--line); padding:60px 6vw 30px;}
+  footer{
+    position:relative;
+    margin-top:20px;
+    border-top:1px solid var(--line);
+    padding:60px 6vw 30px;
+    overflow:hidden;
+    background:var(--bg-alt);
+}
+footer::before{
+    content:"";
+    position:absolute; inset:0; z-index:0;
+    background-image: url('centro-storage-yguazu-bit7even-01.jpg');
+    background-size:cover; background-position:center;
+    filter: grayscale(0.3);
+    opacity:0.35;
+}
+footer::after{
+    content:"";
+    position:absolute; inset:0; z-index:0;
+    background:linear-gradient(180deg, rgba(5,7,8,0.75), rgba(5,7,8,0.95));
+}
+footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   .foot-grid{display:grid; grid-template-columns:1fr; gap:36px;}
   .foot-brand img{height:48px; margin-bottom:14px;}
   .foot-brand p{color:var(--text-dim); font-size:0.9rem; line-height:1.6; font-weight:500; max-width:34ch;}
