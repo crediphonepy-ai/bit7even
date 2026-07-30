@@ -249,12 +249,11 @@
 
   /* ---------- CONTACTO ---------- */
   .contact{padding-top:80px; padding-bottom:90px;}
-  .contact-wrap{margin-top:36px; display:grid; grid-template-columns:1fr; gap:40px; align-items:center;}
-  .contact-info p{color:var(--text-dim); font-size:0.95rem; line-height:1.6; font-weight:500; max-width:40ch;}
-  .contact-info .rows{margin-top:24px; display:flex; flex-direction:column; gap:16px;}
-  .contact-info .row{display:flex; gap:12px; align-items:center; font-size:0.92rem; font-weight:600;}
-  .contact-info .row .ic{width:36px; height:36px; border-radius:10px; background:var(--cyan-dim); display:flex; align-items:center; justify-content:center; color:var(--cyan-2); flex-shrink:0;}
-  form{display:flex; flex-direction:column; gap:20px;}
+  .contact-header{margin-top:36px; text-align:center;}
+  .contact-header .eyebrow{justify-content:center;}
+  .contact-header .section-title{max-width:none; margin-left:auto; margin-right:auto;}
+  .contact-header .section-sub{margin-left:auto; margin-right:auto; text-align:center;}
+  form{display:flex; flex-direction:column; gap:20px; max-width:700px; margin:40px auto 0;}
   .field label{display:block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px;}
   .field input, .field textarea{
     width:100%; background:var(--panel); border:1px solid var(--line); border-radius:10px;
@@ -264,7 +263,6 @@
   .field input:focus, .field textarea:focus{border-color:var(--cyan);}
   .field textarea{min-height:110px; resize:vertical;}
   #formMsg{font-size:0.85rem; color:var(--cyan-2); font-weight:600; margin-top:4px;}
-  @media(min-width:900px){ .contact-wrap{grid-template-columns:0.9fr 1.1fr;} }
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -469,26 +467,19 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 </section>
 
 <section class="contact" id="contacto">
-  <div class="eyebrow reveal">Contacto</div>
-  <h2 class="section-title reveal">Solicitá una Asesoría Técnica</h2>
-  <div class="contact-wrap">
-    <div class="contact-info reveal">
-      <p>Contanos tu proyecto de infraestructura eléctrica o energética. Te respondemos con una propuesta técnica a la brevedad.</p>
-      <div class="rows">
-        <div class="row">Respuesta en menos de 24hs</div>
-        <div class="row">Propuesta técnica sin costo</div>
-        <div class="row">Cobertura en todo Paraguay</div>
-      </div>
-    </div>
-    <form class="reveal" id="contactForm">
-      <div class="field"><label for="nombre">Nombre *</label><input type="text" id="nombre" required></div>
-      <div class="field"><label for="email">Email *</label><input type="email" id="email" required></div>
-      <div class="field"><label for="tel">Teléfono</label><input type="tel" id="tel"></div>
-      <div class="field"><label for="msg">Mensaje *</label><textarea id="msg" required></textarea></div>
-      <button type="submit" class="btn btn-primary">Solicitar Asesoría</button>
-      <span id="formMsg"></span>
-    </form>
+  <div class="contact-header">
+    <div class="eyebrow reveal">Contacto</div>
+    <h2 class="section-title reveal">Solicita una Asesoría Técnica</h2>
+    <p class="section-sub reveal">Contanos tu proyecto. Te respondemos con una propuesta técnica a la brevedad.</p>
   </div>
+  <form class="reveal" id="contactForm">
+    <div class="field"><label for="nombre">Nombre *</label><input type="text" id="nombre" required></div>
+    <div class="field"><label for="email">Email *</label><input type="email" id="email" required></div>
+    <div class="field"><label for="tel">Teléfono</label><input type="tel" id="tel"></div>
+    <div class="field"><label for="msg">Mensaje *</label><textarea id="msg" required></textarea></div>
+    <button type="submit" class="btn btn-primary">Solicitar Asesoría</button>
+    <span id="formMsg"></span>
+  </form>
 </section>
 <footer>
   <div class="foot-grid">
