@@ -76,7 +76,9 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:16px 5vw;
     background:linear-gradient(to bottom, rgba(5,7,8,0.92), transparent);
+    transition:background .3s ease;
   }
+  header.scrolled{ background:#050708; }
   header .logo img{height:34px;}
   nav.desktop-nav{display:none; gap:30px; font-size:14px; font-weight:600;}
   nav.desktop-nav a{text-decoration:none; color:var(--text-dim); transition:color .2s;}
@@ -569,6 +571,16 @@
     v.addEventListener('error', ()=> v.style.display='none');
   }
 
+  // Header: fondo transparente arriba, sólido al hacer scroll
+  const headerEl = document.querySelector('header');
+  function checkHeaderScroll(){
+    if(window.scrollY > 40){ headerEl.classList.add('scrolled'); }
+    else{ headerEl.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', checkHeaderScroll);
+  checkHeaderScroll();
+
+  // mobile menu
   // mobile menu
   const hb = document.getElementById('hamburgerBtn');
   const menu = document.getElementById('mobileMenu');
