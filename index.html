@@ -135,7 +135,7 @@
   .hero-content h1 .accent{background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
   .hero-content h1 .subline{display:inline-block; font-size:0.6em; font-weight:600; color:#D5DADD;}
   .hero-content p{margin-top:20px; max-width:52ch; margin-left:auto; margin-right:auto; text-align:center; color:#D5DADD; font-size:1.02rem; line-height:1.65; font-weight:500; text-shadow: 0 2px 12px rgba(0,0,0,0.55);}
-  .hero-content .cta-row{margin-top:32px; display:flex; flex-direction:column; gap:14px;}
+  .hero-content .cta-row{margin-top:32px; display:flex; flex-direction:column; gap:14px; justify-content:center;}
   .hero-content .cta-row .btn{width:100%;}
   @media(min-width:640px){ .hero-content .cta-row{flex-direction:row;} .hero-content .cta-row .btn{width:auto;} }
 
@@ -273,8 +273,7 @@ footer::before{
     position:absolute; inset:0; z-index:0;
     background-image: url('hero-bg.jpg');
     background-size:cover; background-position:center;
-    filter: grayscale(0.7);
-    opacity:0.35;
+    opacity:0.5;
 }
 @media(max-width:640px){
   footer::before{ background-position: right bottom; }
