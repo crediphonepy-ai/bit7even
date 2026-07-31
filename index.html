@@ -48,7 +48,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Oswald:wght@500;600;700;800&display=swap" rel="stylesheet">
  <style>
   :root{
     --bg:#050708;
@@ -63,12 +63,12 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{background:var(--bg); color:var(--text); font-family:'Manrope',sans-serif; font-weight:400; overflow-x:hidden;}
+  body{background:var(--bg); color:var(--text); font-family:'Roboto',sans-serif; font-weight:400; overflow-x:hidden;}
   ::selection{background:var(--cyan); color:#00121F;}
   img{max-width:100%; display:block;}
   a{color:inherit;}
 
-  h1,h2,h3{font-weight:800; letter-spacing:-0.01em; line-height:1.05;}
+  h1,h2,h3{font-family:'Oswald',sans-serif; font-weight:700; letter-spacing:-0.01em; line-height:1.05;}
 
   /* ---------- HEADER ---------- */
   header{
@@ -104,21 +104,20 @@
   /* ---------- BUTTONS ---------- */
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    font-family:'Manrope',sans-serif; font-weight:700; font-size:14px;
-    padding:16px 26px; border-radius:8px; text-decoration:none; cursor:pointer; border:none;
+    font-family:'Roboto',sans-serif; font-weight:700; font-size:14px;
+    padding:16px 26px; border-radius:0; text-decoration:none; cursor:pointer; border:none;
     transition:transform .2s ease, box-shadow .2s ease;
-    text-transform:uppercase; letter-spacing:0.03em;
+    text-transform:uppercase; letter-spacing:0.08em;
   }
   .btn-primary{
-    background:linear-gradient(90deg, #1B7FE0, #4FC3FF);
-    color:#00121F;
-    box-shadow:0 8px 24px rgba(46,158,255,0.28);
+    background:#1552C4;
+    color:#fff;
   }
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(46,158,255,0.38);}
+  .btn-primary:hover{transform:translateY(-2px); background:#123f99;}
   .btn-ghost{
-    background:transparent; border:1.5px solid rgba(255,255,255,0.25); color:var(--text);
+    background:transparent; border:2px solid rgba(255,255,255,0.6); color:var(--text);
   }
-  .btn-ghost:hover{border-color:var(--cyan); color:var(--cyan-2);}
+  .btn-ghost:hover{border-color:var(--cyan-2); color:var(--cyan-2);}
 
   /* ---------- HERO ---------- */
   .hero{position:relative; min-height:100svh; max-height:900px; display:flex; flex-direction:column; justify-content:center; overflow:hidden;}
@@ -131,10 +130,13 @@
   .hero-media video.loaded{opacity:1;}
   .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(5,7,8,0.75) 0%, rgba(5,7,8,0.25) 32%, rgba(5,7,8,0.55) 62%, rgba(5,7,8,0.98) 100%);}
   .hero-content{position:relative; z-index:2; padding:110px 6vw 0; display:flex; flex-direction:column; align-items:center;}
-  .hero-content h1{font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:0em; line-height:1.08; font-size:clamp(2.26rem, 6vw, 3.8rem); max-width:640px; text-align:center; overflow-wrap:break-word; padding:0 8px;}
-  .hero-content h1 .mainline{display:block; width:100%; text-align:center;}
-  .hero-content h1 .accent{display:block; width:100%; text-align:center; background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .hero-content h1 .subline{display:block; width:100%; text-align:center; font-size:0.58em; font-weight:600; color:#D5DADD; margin:0.3em 0;}
+  .hero-content h1{font-family:'Oswald',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.01em; line-height:1.05; font-size:clamp(2.3rem, 6vw, 3.9rem); max-width:820px; text-align:center; overflow-wrap:break-word; padding:0 8px; color:#fff;}
+  .h1-desktop{display:none;}
+  @media(min-width:900px){
+    .h1-mobile{display:none;}
+    .h1-desktop{display:block;}
+  }
+  .hero-divider{width:70px; height:2px; background:var(--cyan-2); margin:26px auto 0;}
   .hero-content p{margin-top:20px; max-width:650px; text-align:center; color:#D5DADD; font-size:1.02rem; line-height:1.65; font-weight:700; text-shadow: 0 2px 12px rgba(0,0,0,0.55);}
   .hero-content .cta-row{margin-top:32px; display:flex; flex-direction:column; gap:14px; justify-content:center; width:100%;}
   .hero-content .cta-row .btn{width:100%;}
@@ -256,7 +258,7 @@
   .field label{display:block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px;}
   .field input, .field textarea{
     width:100%; background:var(--panel); border:1px solid var(--line); border-radius:10px;
-    padding:14px 16px; color:var(--text); font-family:'Manrope',sans-serif; font-size:0.95rem; font-weight:500; outline:none;
+    padding:14px 16px; color:var(--text); font-family:'Roboto',sans-serif; font-size:0.95rem; font-weight:500; outline:none;
     transition:border-color .2s;
   }
   .field input:focus, .field textarea:focus{border-color:var(--cyan);}
@@ -340,10 +342,12 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <h1><span class="mainline">Infraestructura energética</span><span class="subline">para la era de la</span><span class="accent">Inteligencia Artificial</span></h1>
+    <h1 class="h1-mobile">Infraestructura<br>energética<br>para la era de la<br>Inteligencia<br>Artificial</h1>
+    <h1 class="h1-desktop">Infraestructura energética para la era de la Inteligencia Artificial</h1>
+    <div class="hero-divider"></div>
     <p>Diseñamos e implementamos infraestructura energética, sistemas de refrigeración (cooling) e infraestructura crítica para centros de datos, inteligencia artificial y proyectos de misión crítica.</p>
     <div class="cta-row">
-      <a href="#contacto" class="btn btn-primary">Solicitar Asesoría</a>
+      <a href="#contacto" class="btn btn-primary">Contáctanos</a>
       <a href="#servicios" class="btn btn-ghost">Nuestros servicios</a>
     </div>
   </div>
