@@ -124,7 +124,7 @@
   .hero-media{position:absolute; inset:0; z-index:0;}
   .hero-media video, .hero-media img{width:100%; height:100%; object-fit:cover; object-position: center 75%;}
   @media(max-width:640px){
-  .hero-media video, .hero-media img{ object-position: 70% 75%; }
+  .hero-media video, .hero-media img{ object-position: 70% 90%; }
 }
   .hero-media video{position:absolute; inset:0; opacity:0; transition:opacity 1s ease;}
   .hero-media video.loaded{opacity:1;}
@@ -136,14 +136,12 @@
   .hero-content .cta-row .btn{width:100%;}
   @media(min-width:640px){ .hero-content .cta-row{flex-direction:row;} .hero-content .cta-row .btn{width:auto;} }
 
-  .hero-stats{
-    position:relative; z-index:2; margin-top:44px; padding:26px 6vw 34px;
-    display:grid; grid-template-columns:repeat(2,1fr); gap:26px 16px;
-    border-top:1px solid var(--line);
-  }
-  .hero-stats .stat strong{display:block; font-family:'Oswald',sans-serif; font-size:clamp(1.9rem,6vw,2.6rem); font-weight:700; background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .hero-stats .stat span{display:block; margin-top:4px; font-size:14px; font-weight:800; color:var(--text-dim); letter-spacing:0.02em; text-transform:uppercase;}
-  @media(min-width:700px){ .hero-stats{grid-template-columns:repeat(4,1fr);} }
+  /* ---------- STATS BAND (separado del hero) ---------- */
+  .stats-band{ position:relative; background:var(--bg-alt); padding:44px 6vw; border-bottom:1px solid var(--line); }
+  .stats-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px 16px; }
+  .stats-grid .stat strong{display:block; font-family:'Oswald',sans-serif; font-size:clamp(1.9rem,6vw,2.6rem); font-weight:700; background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .stats-grid .stat span{display:block; margin-top:4px; font-size:14px; font-weight:800; color:var(--text-dim); letter-spacing:0.02em; text-transform:uppercase;}
+  @media(min-width:700px){ .stats-grid{grid-template-columns:repeat(4,1fr);} }
 
   /* ---------- reveal ---------- */
   .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
@@ -343,11 +341,14 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       <a href="#servicios" class="btn btn-ghost">Nuestros servicios</a>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><strong>4+</strong><span>Años de<br>Experiencia</span></div>
-    <div class="stat"><strong>480+</strong><span>Mega Watts<br>Instalados</span></div>
-    <div class="stat"><strong>100%</strong><span>Ingeniería<br>Especializada</span></div>
-    <div class="stat"><strong>PY</strong><span>Cobertura<br>Nacional</span></div>
+</section>
+
+<section class="stats-band">
+  <div class="stats-grid">
+    <div class="stat reveal"><strong>4+</strong><span>Años de<br>Experiencia</span></div>
+    <div class="stat reveal"><strong>480+</strong><span>Mega Watts<br>Instalados</span></div>
+    <div class="stat reveal"><strong>100%</strong><span>Ingeniería<br>Especializada</span></div>
+    <div class="stat reveal"><strong>PY</strong><span>Cobertura<br>Nacional</span></div>
   </div>
 </section>
 
@@ -609,7 +610,6 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   window.addEventListener('scroll', checkHeaderScroll);
   checkHeaderScroll();
 
-  // mobile menu
   // mobile menu
   const hb = document.getElementById('hamburgerBtn');
   const menu = document.getElementById('mobileMenu');
