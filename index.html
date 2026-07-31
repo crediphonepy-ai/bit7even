@@ -160,22 +160,7 @@
 
   /* ---------- ABOUT ---------- */
   .about{padding-top:90px; padding-bottom:70px;}
-  .about-grid-main{
-    display:grid; grid-template-columns:1fr; gap:28px;
-    align-items:center;
-    margin-bottom:50px;
-  }
-  .about-photo{
-    width:100%; height:260px; object-fit:cover; object-position:center 75%;
-    border-radius:16px;
-    box-shadow:0 20px 40px rgba(0,0,0,0.4);
-    order:2;
-  }
-  @media(min-width:900px){
-    .about-grid-main{ grid-template-columns:1.1fr 1fr; gap:50px; }
-    .about-photo{ height:420px; order:0; }
-  }
-  .about-grid{margin-top:0; display:grid; grid-template-columns:1fr; gap:16px;}
+  .about-grid{margin-top:36px; display:grid; grid-template-columns:1fr; gap:16px;}
   .about-card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px;}
   .about-card h3{font-size:1.1rem; font-weight:800; margin-bottom:8px;}
   .about-card p{color:var(--text-dim); font-size:0.92rem; line-height:1.6; font-weight:500;}
@@ -350,7 +335,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     <p>Diseñamos e implementamos infraestructura energética, sistemas de refrigeración (cooling) e infraestructura crítica para centros de datos, inteligencia artificial y proyectos de misión crítica.</p>
     <div class="cta-row">
       <a href="#contacto" class="btn btn-primary">Solicitar Asesoría</a>
-      <a href="#proyectos" class="btn btn-ghost">Ver proyectos</a>
+      <a href="#servicios" class="btn btn-ghost">Nuestros servicios</a>
     </div>
   </div>
   <div class="hero-stats">
@@ -362,15 +347,9 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 </section>
 
 <section class="about" id="nosotros">
-  <div class="about-grid-main">
-    <div class="about-text">
-      <div class="eyebrow reveal">Nosotros</div>
-      <h2 class="section-title reveal">Tu socio estratégico en infraestructura energética</h2>
-      <p class="section-sub reveal">BIT7EVEN es una empresa paraguaya de ingeniería electromecánica e infraestructura. Diseñamos, construimos y mantenemos proyectos de energía e infraestructura crítica —subestaciones, redes de media tensión, plantas industriales y soporte para centros de datos y minería digital— garantizando continuidad operativa donde una interrupción no es una opción.</p>
-      <a href="#servicios" class="btn btn-primary reveal" style="margin-top:28px;">Nuestros servicios</a>
-    </div>
-    <img class="about-photo reveal" src="subestacion-storage-hero-bit7even.jpg" alt="Centro de storage y subestación BIT7EVEN">
-  </div>
+  <div class="eyebrow reveal">Nosotros</div>
+  <h2 class="section-title reveal">Tu socio estratégico en infraestructura energética</h2>
+  <p class="section-sub reveal">BIT7EVEN es una empresa paraguaya de ingeniería electromecánica e infraestructura. Diseñamos, construimos y mantenemos proyectos de energía e infraestructura crítica —subestaciones, redes de media tensión, plantas industriales y soporte para centros de datos y minería digital— garantizando continuidad operativa donde una interrupción no es una opción.</p>
   <div class="about-grid">
     <div class="about-card reveal">
       <h3>Ingeniería</h3>
