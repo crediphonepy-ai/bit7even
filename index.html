@@ -256,10 +256,10 @@
 
   /* ---------- CONTACTO ---------- */
   .contact{padding-top:80px; padding-bottom:90px;}
-  .contact-header{margin-top:36px; text-align:center;}
-  .contact-header .eyebrow{justify-content:center;}
-  .contact-header .section-title{max-width:none; margin-left:auto; margin-right:auto;}
-  .contact-header .section-sub{margin-left:auto; margin-right:auto; text-align:center;}
+  .contact-header{margin-top:36px; max-width:700px; margin-left:auto; margin-right:auto;}
+  .contact-header .eyebrow{justify-content:flex-start;}
+  .contact-header .section-title{max-width:none; margin-left:0; margin-right:0; text-align:left;}
+  .contact-header .section-sub{margin-left:0; margin-right:0; text-align:left;}
   form{display:flex; flex-direction:column; gap:20px; max-width:700px; margin:40px auto 0;}
   .field label{display:block; font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); margin-bottom:8px;}
   .field input, .field textarea{
@@ -398,18 +398,6 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   </div>
 </section>
 
-<section class="cooling">
-  <div class="eyebrow reveal">Producto destacado</div>
-  <h2 class="section-title reveal" style="max-width:none;">BIT7 Cooling Management</h2>
-  <p class="section-sub reveal">Solución de refrigeración líquida de alto rendimiento para centros de datos e infraestructura crítica.</p>
-  <a href="#contacto" class="cooling-card reveal">
-    <img src="bit7-cooling-management.jpg" alt="BIT7 Cooling Management - refrigeración líquida para data centers">
-    <div class="cooling-arrow">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M17 7H9M17 7v8"/></svg>
-    </div>
-  </a>
-</section>
-
 <section class="projects" id="proyectos">
   <div class="eyebrow reveal">Proyectos</div>
   <h2 class="section-title reveal">Proyectos ejecutados por BIT7EVEN</h2>
@@ -456,7 +444,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   <h2>Fundada en Paraguay</h2>
   <div class="founded-stats">
     <div><div class="n">4+</div><div class="l">Años de operación</div></div>
-    <div><div class="n">MT/AT</div><div class="l">Media y alta tensión</div></div>
+    <div><div class="n">480 MW</div><div class="l">Potencia instalada</div></div>
     <div><div class="n">100%</div><div class="l">Ingeniería especializada</div></div>
   </div>
 </section>
@@ -470,6 +458,18 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     <div class="why-item reveal"><div class="num">03</div><div><h3>Innovación</h3><p>Soluciones actualizadas para infraestructura de IA y computación de alto rendimiento.</p></div></div>
     <div class="why-item reveal"><div class="num">04</div><div><h3>Cobertura nacional</h3><p>Capacidad de despliegue de proyectos en todo Paraguay.</p></div></div>
   </div>
+</section>
+
+<section class="cooling">
+  <div class="eyebrow reveal">Producto destacado</div>
+  <h2 class="section-title reveal" style="max-width:none;">BIT7 Cooling Management</h2>
+  <p class="section-sub reveal">Solución de refrigeración líquida de alto rendimiento para centros de datos e infraestructura crítica.</p>
+  <a href="#contacto" class="cooling-card reveal">
+    <img src="bit7-cooling-management.jpg" alt="BIT7 Cooling Management - refrigeración líquida para data centers">
+    <div class="cooling-arrow">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M17 7H9M17 7v8"/></svg>
+    </div>
+  </a>
 </section>
 
 <section class="contact" id="contacto">
