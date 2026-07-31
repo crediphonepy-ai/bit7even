@@ -131,9 +131,10 @@
   .hero-media video.loaded{opacity:1;}
   .hero-scrim{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(5,7,8,0.75) 0%, rgba(5,7,8,0.25) 32%, rgba(5,7,8,0.55) 62%, rgba(5,7,8,0.98) 100%);}
   .hero-content{position:relative; z-index:2; padding:110px 6vw 0;}
-  .hero-content h1{font-family:'Oswald',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.005em; font-size:clamp(1.6rem, 4.2vw, 2.9rem); max-width:22ch;}
+  .hero-content h1{font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-0.01em; font-size:clamp(1.8rem, 5vw, 3.2rem); max-width:15ch; margin-left:auto; margin-right:auto; text-align:center;}
   .hero-content h1 .accent{background:linear-gradient(90deg, var(--cyan), var(--cyan-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-  .hero-content p{margin-top:20px; max-width:52ch; color:#D5DADD; font-size:1.02rem; line-height:1.65; font-weight:500; text-shadow: 0 2px 12px rgba(0,0,0,0.55);}
+  .hero-content h1 .subline{display:inline-block; font-size:0.6em; font-weight:600; color:#D5DADD;}
+  .hero-content p{margin-top:20px; max-width:52ch; margin-left:auto; margin-right:auto; text-align:center; color:#D5DADD; font-size:1.02rem; line-height:1.65; font-weight:500; text-shadow: 0 2px 12px rgba(0,0,0,0.55);}
   .hero-content .cta-row{margin-top:32px; display:flex; flex-direction:column; gap:14px;}
   .hero-content .cta-row .btn{width:100%;}
   @media(min-width:640px){ .hero-content .cta-row{flex-direction:row;} .hero-content .cta-row .btn{width:auto;} }
@@ -270,10 +271,13 @@
 footer::before{
     content:"";
     position:absolute; inset:0; z-index:0;
-    background-image: url('centro-storage-yguazu-footer.jpg');
+    background-image: url('hero-bg.jpg');
     background-size:cover; background-position:center;
-    filter: grayscale(0.3);
+    filter: grayscale(0.7);
     opacity:0.35;
+}
+@media(max-width:640px){
+  footer::before{ background-position: right bottom; }
 }
 footer::after{
     content:"";
@@ -333,7 +337,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   </div>
   <div class="hero-scrim"></div>
   <div class="hero-content">
-    <h1>INFRAESTRUCTURA ENERGÉTICA<br>PARA LA ERA<br><span class="accent">DE LA INTELIGENCIA ARTIFICIAL</span></h1>
+    <h1>Infraestructura energética <span class="subline">para la nueva era de la</span><br><span class="accent">Inteligencia Artificial</span></h1>
     <p>Diseñamos e implementamos infraestructura energética, sistemas de refrigeración (cooling) e infraestructura crítica para centros de datos, inteligencia artificial y proyectos de misión crítica.</p>
     <div class="cta-row">
       <a href="#contacto" class="btn btn-primary">Solicitar Asesoría</a>
