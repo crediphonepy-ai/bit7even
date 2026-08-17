@@ -209,7 +209,7 @@
   .proj-card .info{position:absolute; left:22px; right:22px; bottom:20px; z-index:2;}
   .proj-card .info h3{font-size:1.4rem; font-weight:800;}
   .proj-card .info span{display:block; margin-top:4px; font-size:0.85rem; color:var(--text-dim); font-weight:600;}
-  @media(min-width:800px){ .proj-grid{display:grid; grid-template-columns:repeat(3,1fr);} }
+  @media(min-width:800px){ .proj-grid{display:grid; grid-template-columns:repeat(2,1fr);} }
 
   /* ---------- LIGHTBOX ---------- */
   .lightbox{position:fixed; inset:0; z-index:200; background:rgba(3,4,5,0.94); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; padding:60px 5vw 24px;}
@@ -417,6 +417,12 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       <div class="count">1/7</div>
       <div class="info"><h3>Valenzuela, Cordillera</h3><span data-i18n="proj3_tag">Subestación e Infraestructura</span></div>
     </div>
+    <div class="proj-card reveal" onclick="openLightbox(3)">
+      <img src="transporte-transformador-yguazu-ampliacion-400mw.jpg" alt="Ampliación de potencia 400MW en Yguazú, transporte de transformador">
+      <div class="grad"></div>
+      <div class="count">1/2</div>
+      <div class="info"><h3>Yguazú, Alto Paraná</h3><span data-i18n="proj4_tag">Ampliación de potencia 400MW</span></div>
+    </div>
   </div>
 </section>
 
@@ -532,14 +538,14 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       title: "Subestación e Infraestructura",
       loc: "Yguazú, Alto Paraná",
       photos: [
-  "centro-storage-yguazu-bit7even-01.jpg",
-  "centro-storage-yguazu-bit7even-02.jpg",
-  "centro-storage-yguazu-bit7even-03.jpg",
-  "obra-electromecanica-yguazu-vista-aerea.jpg",
-  "centro-storage-yguazu-bit7even-04.jpg",
-  "centro-storage-yguazu-bit7even-05.jpg",
-  "centro-storage-yguazu-bit7even-06.jpg"
-]
+        "centro-storage-yguazu-bit7even-01.jpg",
+        "centro-storage-yguazu-bit7even-02.jpg",
+        "centro-storage-yguazu-bit7even-03.jpg",
+        "obra-electromecanica-yguazu-vista-aerea.jpg",
+        "centro-storage-yguazu-bit7even-04.jpg",
+        "centro-storage-yguazu-bit7even-05.jpg",
+        "centro-storage-yguazu-bit7even-06.jpg"
+      ]
     },
     {
       title: "Subestación e Infraestructura",
@@ -565,6 +571,14 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
         "obra-electromecanica-valenzuela-vista-aerea.jpg",
         "subestacion-electrica-valenzuela-cordillera1.jpg",
         "subestacion-electrica-valenzuela-cordillera2.jpg"
+      ]
+    },
+    {
+      title: "Ampliación de potencia 400MW",
+      loc: "Yguazú, Alto Paraná",
+      photos: [
+        "transporte-transformador-yguazu-ampliacion-400mw.jpg",
+        "subestacion-yguazu-ampliacion-2.jpg"
       ]
     }
   ];
@@ -682,7 +696,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc3_title:"Data Centers", svc3_p:"Soporte de infraestructura eléctrica y refrigeración para centros de datos de misión crítica.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Sistemas de almacenamiento de energía integrados a la operación eléctrica del sitio.",
       proj_eyebrow:"Proyectos", proj_title:"Proyectos ejecutados por BIT7EVEN",
-      proj1_tag:"Subestación e Infraestructura", proj2_tag:"Subestación e Infraestructura", proj3_tag:"Subestación e Infraestructura",
+      proj1_tag:"Subestación e Infraestructura", proj2_tag:"Subestación e Infraestructura", proj3_tag:"Subestación e Infraestructura", proj4_tag:"Ampliación de potencia 400MW",
       founded_eyebrow:"Trayectoria", founded_title:"Fundada en Paraguay",
       founded1_label:"Años de operación", founded2_label:"Potencia instalada", founded3_label:"Ingeniería especializada",
       why_eyebrow:"Por qué BIT7EVEN", why_title:"Ingeniería que no se puede improvisar",
@@ -715,7 +729,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc3_title:"Data Centers", svc3_p:"Electrical infrastructure and cooling support for mission-critical data centers.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Energy storage systems integrated into the site's electrical infrastructure and operations.",
       proj_eyebrow:"Projects", proj_title:"Projects Delivered by BIT7EVEN",
-      proj1_tag:"Substation & Infrastructure", proj2_tag:"Substation & Infrastructure", proj3_tag:"Substation & Infrastructure",
+      proj1_tag:"Substation & Infrastructure", proj2_tag:"Substation & Infrastructure", proj3_tag:"Substation & Infrastructure", proj4_tag:"400MW Power Expansion",
       founded_eyebrow:"Track Record", founded_title:"Founded in Paraguay",
       founded1_label:"Years in Operation", founded2_label:"Installed Capacity", founded3_label:"Specialized Engineering",
       why_eyebrow:"Why BIT7EVEN", why_title:"Engineering You Can't Afford to Improvise",
