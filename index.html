@@ -555,8 +555,8 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     const p = projects[lbProjectIdx];
     document.getElementById('lbImg').src = p.photos[lbPhotoIdx];
     document.getElementById('lbImg').alt = p.title + ' - ' + p.loc;
-    document.getElementById('lbTitle').textContent = p.title;
-    document.getElementById('lbLoc').textContent = p.loc;
+    document.getElementById('lbTitle').textContent = p.loc;
+    document.getElementById('lbLoc').textContent = p.title;
     document.getElementById('lbCounter').textContent = (lbPhotoIdx+1) + ' / ' + p.photos.length;
   }
   function openLightbox(projectIdx){
