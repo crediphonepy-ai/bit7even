@@ -91,10 +91,11 @@
   }
 
   .lang-toggle{
-    background:transparent; border:1px solid var(--line); color:var(--text-dim);
-    font-size:12px; font-weight:700; padding:8px 14px; border-radius:20px; cursor:pointer;
-    transition:border-color .2s, color .2s; letter-spacing:0.04em;
-  }
+  background:transparent; border:1px solid var(--line); color:var(--text-dim);
+  font-size:12px; font-weight:700; padding:8px 14px; border-radius:20px; cursor:pointer;
+  transition:border-color .2s, color .2s; letter-spacing:0.04em;
+  display:inline-flex; /* visible en todos los tamaños */
+}
   .lang-toggle:hover{ border-color:var(--cyan); color:var(--cyan-2); }
   .lang-toggle-mobile{
     background:transparent; border:1px solid var(--line); color:var(--text);
@@ -316,7 +317,8 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 </head>
 <body>
 
-<header>
+}
+  <header>
   <a href="#inicio" class="logo"><img src="logo.png" alt="BIT7EVEN"></a>
   <nav class="desktop-nav">
     <a href="#inicio" data-i18n="nav_inicio">Inicio</a>
@@ -324,9 +326,11 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     <a href="#servicios" data-i18n="nav_servicios">Servicios</a>
     <a href="#proyectos" data-i18n="nav_proyectos">Proyectos</a>
     <a href="#contacto" data-i18n="nav_contacto">Contacto</a>
-    <button id="langToggle" class="lang-toggle">EN</button>
   </nav>
-  <button class="hamburger" id="hamburgerBtn" aria-label="Menú"><span></span><span></span><span></span></button>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <button id="langToggle" class="lang-toggle">EN</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
