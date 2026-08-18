@@ -183,20 +183,27 @@
   @media(min-width:700px){ .svc-grid{grid-template-columns:repeat(2,1fr);} }
   @media(min-width:1100px){ .svc-grid{grid-template-columns:repeat(4,1fr);} }
 
-  /* ---------- COOLING ---------- */
-  .cooling{padding-top:80px; padding-bottom:80px;}
-  .cooling-card{
-    display:block; position:relative; margin-top:36px;
-    border-radius:16px; overflow:hidden; aspect-ratio:1536/1024;
+  /* ---------- COOLING (HYDROCOOLING MARQUEE) ---------- */
+.cooling{padding-top:80px; padding-bottom:80px; background:#000; margin-top:20px;}
+.hc-marquee{margin-top:36px; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);}
+.hc-track{display:flex; gap:20px; width:max-content; animation:hc-scroll 30s linear infinite;}
+.hc-slide{position:relative; width:340px; aspect-ratio:4/3; border-radius:16px; overflow:hidden; flex-shrink:0; border:1px solid var(--line); background:#F5F7F8;}
+.hc-slide img{width:100%; height:100%; object-fit:cover;}
+.hc-slide.hc-logo img{object-fit:contain;}
+.hc-cap{position:absolute; left:16px; bottom:14px; z-index:2; color:#fff; font-size:12px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; text-shadow:0 2px 8px rgba(0,0,0,0.8);}
+.hc-marquee:hover .hc-track{animation-play-state:paused;}
+
+@keyframes hc-scroll{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(calc(-340px * 4 - 20px * 4)); }
+}
+@media(max-width:640px){
+  .hc-slide{width:260px;}
+  @keyframes hc-scroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(calc(-260px * 4 - 20px * 4)); }
   }
-  .cooling-card img{width:100%; height:100%; object-fit:cover;}
-  .cooling-arrow{
-    position:absolute; bottom:20px; right:20px; z-index:2;
-    width:44px; height:44px; border-radius:50%;
-    background:rgba(5,7,8,0.65); backdrop-filter:blur(4px);
-    border:1px solid var(--line); color:var(--cyan-2);
-    display:flex; align-items:center; justify-content:center;
-  }
+}
 
    /* ---------- OPERACIÓN Y MONITOREO ---------- */
 .op-monitoreo{padding-top:80px; padding-bottom:80px;}
@@ -492,15 +499,45 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 </section>
 
 <section class="cooling">
-  <div class="eyebrow reveal" data-i18n="cooling_eyebrow">Producto destacado</div>
-  <h2 class="section-title reveal" style="max-width:none;" data-i18n="cooling_title">BIT7 Cooling Management</h2>
-  <p class="section-sub reveal" data-i18n="cooling_p">Solución de refrigeración líquida de alto rendimiento para centros de datos e infraestructura crítica.</p>
-  <a href="#contacto" class="cooling-card reveal">
-    <img src="bit7-cooling-management.jpg" alt="BIT7 Cooling Management - refrigeración líquida para data centers">
-    <div class="cooling-arrow">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M17 7H9M17 7v8"/></svg>
+  <div class="eyebrow reveal" data-i18n="hc_eyebrow">Hydrocooling</div>
+  <h2 class="section-title reveal" style="max-width:none;" data-i18n="hc_title">Enfriamiento líquido para infraestructura crítica</h2>
+  <p class="section-sub reveal" data-i18n="hc_p">Formulamos, suministramos y supervisamos sistemas de enfriamiento líquido a medida, garantizando estabilidad térmica continua.</p>
+
+  <div class="hc-marquee reveal">
+    <div class="hc-track">
+      <div class="hc-slide hc-logo">
+        <img src="bit7-cooling-management-logo.jpg" alt="BIT7 Cooling Management">
+      </div>
+      <div class="hc-slide">
+        <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
+        <span class="hc-cap" data-i18n="hc1_cap">Formulación especializada</span>
+      </div>
+      <div class="hc-slide">
+        <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
+        <span class="hc-cap" data-i18n="hc2_cap">Suministro a medida</span>
+      </div>
+      <div class="hc-slide">
+        <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
+        <span class="hc-cap" data-i18n="hc3_cap">Monitoreo continuo</span>
+      </div>
+      <!-- duplicado para loop continuo -->
+      <div class="hc-slide hc-logo">
+        <img src="bit7-cooling-management-logo.jpg" alt="BIT7 Cooling Management">
+      </div>
+      <div class="hc-slide">
+        <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
+        <span class="hc-cap">Formulación especializada</span>
+      </div>
+      <div class="hc-slide">
+        <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
+        <span class="hc-cap">Suministro a medida</span>
+      </div>
+      <div class="hc-slide">
+        <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
+        <span class="hc-cap">Monitoreo continuo</span>
+      </div>
     </div>
-  </a>
+  </div>
 </section>
 
 <section class="contact" id="contacto">
@@ -740,8 +777,9 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       why2_title:"Calidad de ejecución", why2_p:"Estándares de obra pensados para operación continua, sin interrupciones.",
       why3_title:"Innovación", why3_p:"Soluciones integrales para infraestructura de IA y proyectos de gran envergadura.",
       why4_title:"Cobertura nacional", why4_p:"Capacidad de despliegue de proyectos en todo Paraguay.",
-      cooling_eyebrow:"Producto destacado", cooling_title:"BIT7 Cooling Management",
-      cooling_p:"Solución de refrigeración líquida de alto rendimiento para centros de datos e infraestructura crítica.",
+      hc_eyebrow:"Hydrocooling", hc_title:"Enfriamiento líquido para infraestructura crítica",
+      hc_p:"Formulamos, suministramos y supervisamos sistemas de enfriamiento líquido a medida, garantizando estabilidad térmica continua.",
+      hc1_cap:"Formulación especializada", hc2_cap:"Suministro a medida", hc3_cap:"Monitoreo continuo",
       contact_eyebrow:"Contacto", contact_title:"Solicitá una Asesoría Técnica",
       contact_p:"Contanos tu proyecto. Te respondemos con una propuesta técnica a la brevedad.",
       form_nombre:"Nombre *", form_email:"Email *", form_tel:"Teléfono", form_msg:"Mensaje *", form_btn:"Solicitar Asesoría",
@@ -776,8 +814,9 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       why2_title:"Quality Execution", why2_p:"Construction standards engineered for continuous operation and maximum reliability.",
       why3_title:"Innovation", why3_p:"Integrated solutions for AI infrastructure and large-scale projects.",
       why4_title:"Nationwide Coverage", why4_p:"The capacity to deploy projects across Paraguay.",
-      cooling_eyebrow:"Featured Solution", cooling_title:"BIT7 Cooling Management",
-      cooling_p:"A high-performance liquid cooling solution for data centers and critical infrastructure.",
+      hc_eyebrow:"Hydrocooling", hc_title:"Liquid cooling for critical infrastructure",
+      hc_p:"We formulate, supply, and supervise custom liquid cooling systems, ensuring continuous thermal stability.",
+      hc1_cap:"Custom formulation", hc2_cap:"Tailored supply", hc3_cap:"Continuous monitoring",
       contact_eyebrow:"Contact", contact_title:"Request a Technical Consultation",
       contact_p:"Tell us about your project. We'll get back to you promptly with a technical proposal.",
       form_nombre:"Name *", form_email:"Email *", form_tel:"Phone", form_msg:"Message *", form_btn:"Request a Consultation",
