@@ -198,7 +198,15 @@
     display:flex; align-items:center; justify-content:center;
   }
 
-  /* ---------- PROYECTOS ---------- */
+   /* ---------- OPERACIÓN Y MONITOREO ---------- */
+.op-monitoreo{padding-top:80px; padding-bottom:80px;}
+.op-grid{margin-top:36px; display:grid; grid-template-columns:1fr; gap:20px;}
+.op-item{border-radius:16px; overflow:hidden; background:var(--panel); border:1px solid var(--line);}
+.op-item img{width:100%; aspect-ratio:4/3; object-fit:cover;}
+.op-item .cap{padding:14px 18px; font-size:0.85rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-dim);}
+@media(min-width:800px){ .op-grid{grid-template-columns:repeat(3,1fr);} }
+  
+   /* ---------- PROYECTOS ---------- */
   .projects{padding-top:80px; padding-bottom:80px;}
   .proj-grid{margin-top:36px; display:flex; flex-direction:column; gap:20px;}
   .proj-card{position:relative; border-radius:18px; overflow:hidden; aspect-ratio:4/3; background:var(--panel); border:1px solid var(--line); cursor:pointer;}
@@ -392,6 +400,26 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     <div class="svc-card reveal"><div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" fill="currentColor" stroke="currentColor"/></svg></div><div class="body"><h3 data-i18n="svc2_title">Media tensión</h3><p data-i18n="svc2_p">Infraestructura de redes de media tensión para instalaciones industriales y comerciales.</p></div></div>
     <div class="svc-card reveal"><div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="6" rx="1"/><rect x="4" y="10" width="16" height="6" rx="1"/><rect x="4" y="17" width="16" height="4" rx="1"/><circle cx="8" cy="6" r="0.8" fill="currentColor" stroke="none"/><circle cx="8" cy="13" r="0.8" fill="currentColor" stroke="none"/></svg></div><div class="body"><h3 data-i18n="svc3_title">Data Centers</h3><p data-i18n="svc3_p">Soporte de infraestructura eléctrica y refrigeración para centros de datos de misión crítica.</p></div></div>
     <div class="svc-card reveal"><div class="ic"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><line x1="9.5" y1="2" x2="14.5" y2="2" stroke-width="2.4"/><path d="M13 8l-3.5 5h3l-1 5.5 4.5-6.5h-3z" fill="currentColor" stroke="none"/></svg></div><div class="body"><h3 data-i18n="svc4_title">Energy Storage (BESS)</h3><p data-i18n="svc4_p">Sistemas de almacenamiento de energía integrados a la operación eléctrica del sitio.</p></div></div>
+  </div>
+</section>
+
+  <section class="op-monitoreo">
+  <div class="eyebrow reveal" data-i18n="op_eyebrow">Operación y Monitoreo</div>
+  <h2 class="section-title reveal" data-i18n="op_title">Control y supervisión de subestaciones en tiempo real</h2>
+  <p class="section-sub reveal" data-i18n="op_p">Supervisamos y operamos subestaciones eléctricas mediante sistemas de monitoreo y control en tiempo real, permitiendo una gestión eficiente, segura y confiable de la infraestructura energética.</p>
+  <div class="op-grid">
+    <div class="op-item reveal">
+      <img src="sala-control-subestacion-scada.jpg" alt="Sala de control con monitoreo SCADA de subestación">
+      <div class="cap" data-i18n="op1_cap">Monitoreo en tiempo real</div>
+    </div>
+    <div class="op-item reveal">
+      <img src="inspeccion-campo-subestacion-bit7even.jpg" alt="Inspección en campo de subestación eléctrica">
+      <div class="cap" data-i18n="op2_cap">Inspección en campo</div>
+    </div>
+    <div class="op-item reveal">
+      <img src="pruebas-diagnostico-transformador-bit7even.jpg" alt="Pruebas y diagnóstico de transformador">
+      <div class="cap" data-i18n="op3_cap">Pruebas y diagnóstico</div>
+    </div>
   </div>
 </section>
 
@@ -700,6 +728,9 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc2_title:"Media tensión", svc2_p:"Infraestructura de redes de media tensión para instalaciones industriales y comerciales.",
       svc3_title:"Data Centers", svc3_p:"Soporte de infraestructura eléctrica y refrigeración para centros de datos de misión crítica.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Sistemas de almacenamiento de energía integrados a la operación eléctrica del sitio.",
+      op_eyebrow:"Operación y Monitoreo", op_title:"Control y supervisión de subestaciones en tiempo real",
+      op_p:"Supervisamos y operamos subestaciones eléctricas mediante sistemas de monitoreo y control en tiempo real, permitiendo una gestión eficiente, segura y confiable de la infraestructura energética.",
+      op1_cap:"Monitoreo en tiempo real", op2_cap:"Inspección en campo", op3_cap:"Pruebas y diagnóstico",
       proj_eyebrow:"Proyectos", proj_title:"Proyectos ejecutados por BIT7EVEN",
       proj1_tag:"Subestación e Infraestructura", proj2_tag:"Subestación e Infraestructura", proj3_tag:"Subestación e Infraestructura", proj4_tag:"Ampliación de potencia 400MW",
       founded_eyebrow:"Trayectoria", founded_title:"Fundada en Paraguay",
@@ -733,6 +764,9 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc2_title:"Medium Voltage", svc2_p:"Medium-voltage network infrastructure for industrial and commercial facilities.",
       svc3_title:"Data Centers", svc3_p:"Electrical infrastructure and cooling support for mission-critical data centers.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Energy storage systems integrated into the site's electrical infrastructure and operations.",
+      op_eyebrow:"Operation & Monitoring", op_title:"Real-time substation control and monitoring",
+      op_p:"We supervise and operate electrical substations through real-time monitoring and control systems, ensuring efficient, safe, and reliable management of energy infrastructure.",
+      op1_cap:"Real-time monitoring", op2_cap:"Field inspection", op3_cap:"Testing & diagnostics",
       proj_eyebrow:"Projects", proj_title:"Projects Delivered by BIT7EVEN",
       proj1_tag:"Substation & Infrastructure", proj2_tag:"Substation & Infrastructure", proj3_tag:"Substation & Infrastructure", proj4_tag:"400MW Power Expansion",
       founded_eyebrow:"Track Record", founded_title:"Founded in Paraguay",
