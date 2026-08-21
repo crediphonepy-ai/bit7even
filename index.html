@@ -211,7 +211,7 @@
 .op-item{border-radius:16px; overflow:hidden; background:var(--panel); border:1px solid var(--line);}
 .op-item img{width:100%; aspect-ratio:4/3; object-fit:cover;}
 .op-item .cap{padding:14px 18px; font-size:0.85rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-dim);}
-@media(min-width:800px){ .op-grid{grid-template-columns:repeat(3,1fr);} }
+@media(min-width:800px){ .op-grid{grid-template-columns:repeat(2,1fr);} }
   
    /* ---------- PROYECTOS ---------- */
   .projects{padding-top:80px; padding-bottom:80px;}
@@ -411,23 +411,19 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 </section>
 
   <section class="op-monitoreo">
-  <div class="eyebrow reveal" data-i18n="op_eyebrow">Operación y Monitoreo</div>
-  <h2 class="section-title reveal" data-i18n="op_title">Control y supervisión de subestaciones en tiempo real</h2>
-  <p class="section-sub reveal" data-i18n="op_p">Supervisamos y operamos subestaciones eléctricas mediante sistemas de monitoreo y control en tiempo real, permitiendo una gestión eficiente, segura y confiable de la infraestructura energética.</p>
+  <div class="eyebrow reveal" data-i18n="op_eyebrow">Subestaciones</div>
+  <h2 class="section-title reveal" data-i18n="op_title">Operación y monitoreo especializado de subestaciones</h2>
+  <p class="section-sub reveal" data-i18n="op_p">Operamos y monitoreamos subestaciones eléctricas de forma continua, con control en tiempo real desde sala de operaciones y en terreno.</p>
   <div class="op-grid">
-    <div class="op-item reveal">
-      <img src="sala-control-subestacion-scada.jpg" alt="Sala de control con monitoreo SCADA de subestación">
-      <div class="cap" data-i18n="op1_cap">Monitoreo en tiempo real</div>
-    </div>
-    <div class="op-item reveal">
-      <img src="inspeccion-campo-subestacion-bit7even.jpg" alt="Inspección en campo de subestación eléctrica">
-      <div class="cap" data-i18n="op2_cap">Inspección en campo</div>
-    </div>
-    <div class="op-item reveal">
-      <img src="pruebas-diagnostico-transformador-bit7even.jpg" alt="Pruebas y diagnóstico de transformador">
-      <div class="cap" data-i18n="op3_cap">Pruebas y diagnóstico</div>
-    </div>
+  <div class="op-item reveal" onclick="openOpLightbox(0)">
+    <img src="sala-control-subestacion-scada.jpg" alt="Sala de control con monitoreo SCADA de subestación">
+    <div class="cap" data-i18n="op1_cap">Monitoreo en tiempo real</div>
   </div>
+  <div class="op-item reveal" onclick="openOpLightbox(1)">
+    <img src="inspeccion-campo-subestacion-bit7even.jpg" alt="Operación en campo de subestación eléctrica">
+    <div class="cap" data-i18n="op2_cap">Operación en campo</div>
+  </div>
+</div>
 </section>
 
 <section class="projects" id="proyectos">
@@ -652,34 +648,60 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
     ]
     }
   ];
+  const opGroups = [
+  {
+    title: "Monitoreo en tiempo real",
+    loc: "Sala de Control SCADA",
+    photos: [
+      "sala-control-subestacion-scada.jpg"
+      // agregá acá las que tengas de SCADA
+    ]
+  },
+  {
+    title: "Operación en campo",
+    loc: "Equipo BIT7EVEN",
+    photos: [
+      "inspeccion-campo-subestacion-bit7even.jpg"
+      // agregá acá las de campo + las de transformadores juntas
+    ]
+  }
+];
+  let lbSource = projects;
   let lbProjectIdx = 0, lbPhotoIdx = 0;
 
-  function renderLightbox(){
-    const p = projects[lbProjectIdx];
-    document.getElementById('lbImg').src = p.photos[lbPhotoIdx];
-    document.getElementById('lbImg').alt = p.title + ' - ' + p.loc;
-    document.getElementById('lbTitle').textContent = p.loc;
-    document.getElementById('lbLoc').textContent = p.title;
-    document.getElementById('lbCounter').textContent = (lbPhotoIdx+1) + ' / ' + p.photos.length;
-  }
-  function openLightbox(projectIdx){
-    lbProjectIdx = projectIdx; lbPhotoIdx = 0;
-    renderLightbox();
-    document.getElementById('lightbox').classList.add('open');
-  }
-  function closeLightbox(){
-    document.getElementById('lightbox').classList.remove('open');
-  }
-  function lbNext(){
-    const p = projects[lbProjectIdx];
-    lbPhotoIdx = (lbPhotoIdx+1) % p.photos.length;
-    renderLightbox();
-  }
-  function lbPrev(){
-    const p = projects[lbProjectIdx];
-    lbPhotoIdx = (lbPhotoIdx-1+p.photos.length) % p.photos.length;
-    renderLightbox();
-  }
+    function renderLightbox(){
+  const p = lbSource[lbProjectIdx];
+  document.getElementById('lbImg').src = p.photos[lbPhotoIdx];
+  document.getElementById('lbImg').alt = p.title + ' - ' + p.loc;
+  document.getElementById('lbTitle').textContent = p.loc;
+  document.getElementById('lbLoc').textContent = p.title;
+  document.getElementById('lbCounter').textContent = (lbPhotoIdx+1) + ' / ' + p.photos.length;
+}
+function openLightbox(projectIdx){
+  lbSource = projects;
+  lbProjectIdx = projectIdx; lbPhotoIdx = 0;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+function openOpLightbox(idx){
+  lbSource = opGroups;
+  lbProjectIdx = idx; lbPhotoIdx = 0;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+function lbNext(){
+  const p = lbSource[lbProjectIdx];
+  lbPhotoIdx = (lbPhotoIdx+1) % p.photos.length;
+  renderLightbox();
+}
+function lbPrev(){
+  const p = lbSource[lbProjectIdx];
+  lbPhotoIdx = (lbPhotoIdx-1+p.photos.length) % p.photos.length;
+  renderLightbox();
+}
   document.getElementById('lightbox').addEventListener('click', function(e){
     if(e.target.id === 'lightbox') closeLightbox();
   });
@@ -765,9 +787,10 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc2_title:"Media tensión", svc2_p:"Infraestructura de redes de media tensión para instalaciones industriales y comerciales.",
       svc3_title:"Data Centers", svc3_p:"Soporte de infraestructura eléctrica y refrigeración para centros de datos de misión crítica.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Sistemas de almacenamiento de energía integrados a la operación eléctrica del sitio.",
-      op_eyebrow:"Operación y Monitoreo", op_title:"Control y supervisión de subestaciones en tiempo real",
-      op_p:"Supervisamos y operamos subestaciones eléctricas mediante sistemas de monitoreo y control en tiempo real, permitiendo una gestión eficiente, segura y confiable de la infraestructura energética.",
-      op1_cap:"Monitoreo en tiempo real", op2_cap:"Inspección en campo", op3_cap:"Pruebas y diagnóstico",
+      op_eyebrow:"Subestaciones", 
+      op_title:"Operación y monitoreo especializado de subestaciones",
+      op_p:"Operamos y monitoreamos subestaciones eléctricas de forma continua, con control en tiempo real desde sala de operaciones y en terreno.",
+      op1_cap:"Monitoreo en tiempo real", op2_cap:"Operación en campo",
       proj_eyebrow:"Proyectos", proj_title:"Proyectos ejecutados por BIT7EVEN",
       proj1_tag:"Subestación e Infraestructura", proj2_tag:"Subestación e Infraestructura", proj3_tag:"Subestación e Infraestructura", proj4_tag:"Ampliación de potencia +100MW",
       founded_eyebrow:"Trayectoria", founded_title:"Fundada en Paraguay",
@@ -802,9 +825,10 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
       svc2_title:"Medium Voltage", svc2_p:"Medium-voltage network infrastructure for industrial and commercial facilities.",
       svc3_title:"Data Centers", svc3_p:"Electrical infrastructure and cooling support for mission-critical data centers.",
       svc4_title:"Energy Storage (BESS)", svc4_p:"Energy storage systems integrated into the site's electrical infrastructure and operations.",
-      op_eyebrow:"Operation & Monitoring", op_title:"Real-time substation control and monitoring",
-      op_p:"We supervise and operate electrical substations through real-time monitoring and control systems, ensuring efficient, safe, and reliable management of energy infrastructure.",
-      op1_cap:"Real-time monitoring", op2_cap:"Field inspection", op3_cap:"Testing & diagnostics",
+      op_eyebrow:"Substations", 
+      op_title:"Specialized substation operation and monitoring",
+      op_p:"We operate and monitor electrical substations continuously, with real-time control from our operations center and in the field.",
+      op1_cap:"Real-time monitoring", op2_cap:"Field operations",
       proj_eyebrow:"Projects", proj_title:"Projects Delivered by BIT7EVEN",
       proj1_tag:"Substation & Infrastructure", proj2_tag:"Substation & Infrastructure", proj3_tag:"Substation & Infrastructure", proj4_tag:"+100MW Power Expansion",
       founded_eyebrow:"Track Record", founded_title:"Founded in Paraguay",
