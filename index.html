@@ -183,26 +183,41 @@
   @media(min-width:700px){ .svc-grid{grid-template-columns:repeat(2,1fr);} }
   @media(min-width:1100px){ .svc-grid{grid-template-columns:repeat(4,1fr);} }
 
-  /* ---------- COOLING (HYDROCOOLING MARQUEE) ---------- */
-.cooling{padding-top:80px; padding-bottom:80px; background:#000; margin-top:20px;}
-.hc-marquee{margin-top:36px; overflow:hidden; -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);}
-.hc-track{display:flex; gap:20px; width:max-content; animation:hc-scroll 30s linear infinite;}
-.hc-slide{position:relative; width:340px; aspect-ratio:4/3; border-radius:16px; overflow:hidden; flex-shrink:0; border:1px solid var(--line); background:#F5F7F8;}
-.hc-slide img{width:100%; height:100%; object-fit:cover;}
-.hc-slide.hc-logo img{object-fit:contain;}
-.hc-cap{position:absolute; left:16px; bottom:14px; z-index:2; color:#fff; font-size:12px; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; text-shadow:0 2px 8px rgba(0,0,0,0.8);}
-.hc-marquee:hover .hc-track{animation-play-state:paused;}
-
-@keyframes hc-scroll{
-  from{ transform:translateX(0); }
-  to{ transform:translateX(calc(-340px * 4 - 20px * 4)); }
+  /* ---------- COOLING (HYDROCOOLING CAROUSEL) ---------- */
+.cooling{padding-top:80px; padding-bottom:80px;}
+.hc-carousel{margin-top:36px; position:relative;}
+.hc-viewport{position:relative; width:100%; overflow:hidden; padding:0 15%;}
+.hc-track{display:flex; transition:transform .4s ease; align-items:center;}
+.hc-slide-full{
+  position:relative; flex-shrink:0; width:100%; aspect-ratio:16/9;
+  border-radius:16px; overflow:hidden; margin:0 10px;
+  opacity:0.4; transform:scale(0.8);
+  filter:grayscale(1) brightness(0.6);
+  transition:.4s ease all;
+  display:flex; align-items:center; justify-content:center; background:#F5F7F8;
 }
-@media(max-width:640px){
-  .hc-slide{width:260px;}
-  @keyframes hc-scroll{
-    from{ transform:translateX(0); }
-    to{ transform:translateX(calc(-260px * 4 - 20px * 4)); }
-  }
+.hc-slide-full.active{
+  opacity:1; transform:scale(1);
+  filter:grayscale(0) brightness(1);
+}
+.hc-slide-full img{width:100%; height:100%; object-fit:cover;}
+.hc-logo-slide{ filter:none !important; }
+.hc-logo-slide img{ object-fit:contain; padding:12%; }
+.hc-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:6;
+  background:none; border:none; cursor:pointer; color:var(--text-dim);
+  padding:4px; transition:color .2s, transform .2s;
+}
+.hc-arrow:hover{color:var(--cyan-2);}
+.hc-prev{left:0;}
+.hc-next{right:0;}
+.hc-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
+.hc-dots span{width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer; transition:background .2s;}
+.hc-dots span.active{background:var(--cyan-2);}
+@media(max-width:900px){
+  .hc-viewport{padding:0;}
+  .hc-slide-full{opacity:1; transform:scale(1); filter:none;}
+  .hc-arrow{display:none;}
 }
 
    /* ---------- OPERACIÓN Y MONITOREO ---------- */
@@ -499,41 +514,34 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
   <h2 class="section-title reveal" style="max-width:none;" data-i18n="hc_title">Soluciones en gestión de enfriamiento líquido adaptadas a cada sistema y sector</h2>
   <p class="section-sub reveal" data-i18n="hc_p">BIT7 Cooling desarrolla y suministra agua grado industrial bajo especificaciones controladas, conforme a los requerimientos específicos de cada sector.</p>
 
-  <div class="hc-marquee reveal">
-    <div class="hc-track">
-      <div class="hc-slide hc-logo">
-        <img src="bit7-cooling-management-logo.jpg" alt="BIT7 Cooling Management">
-      </div>
-      <div class="hc-slide">
-        <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
-        <span class="hc-cap" data-i18n="hc1_cap">Formulación especializada</span>
-      </div>
-      <div class="hc-slide">
-        <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
-        <span class="hc-cap" data-i18n="hc2_cap">Suministro a medida</span>
-      </div>
-      <div class="hc-slide">
-        <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
-        <span class="hc-cap" data-i18n="hc3_cap">Monitoreo continuo</span>
-      </div>
-      <!-- duplicado para loop continuo -->
-      <div class="hc-slide hc-logo">
-        <img src="bit7-cooling-management-logo.jpg" alt="BIT7 Cooling Management">
-      </div>
-      <div class="hc-slide">
-        <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
-        <span class="hc-cap">Formulación especializada</span>
-      </div>
-      <div class="hc-slide">
-        <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
-        <span class="hc-cap">Suministro a medida</span>
-      </div>
-      <div class="hc-slide">
-        <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
-        <span class="hc-cap">Monitoreo continuo</span>
+  <div class="hc-carousel reveal">
+    <button class="hc-arrow hc-prev" onclick="hcPrev()" aria-label="Anterior">
+      <svg width="24" height="38" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4 6 20l14 16"/></svg>
+    </button>
+
+    <div class="hc-viewport">
+      <div class="hc-track" id="hcSlides">
+        <div class="hc-slide-full hc-logo-slide active">
+          <img src="bit7-cooling-management-logo.jpg" alt="BIT7 Cooling">
+        </div>
+        <div class="hc-slide-full">
+          <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
+        </div>
+        <div class="hc-slide-full">
+          <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
+        </div>
+        <div class="hc-slide-full">
+          <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
+        </div>
       </div>
     </div>
+
+    <button class="hc-arrow hc-next" onclick="hcNext()" aria-label="Siguiente">
+      <svg width="24" height="38" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l14 16-14 16"/></svg>
+    </button>
   </div>
+
+  <div class="hc-dots" id="hcDots"></div>
 </section>
 
 <section class="contact" id="contacto">
@@ -717,7 +725,34 @@ function lbPrev(){
     if(e.key === 'ArrowRight') lbNext();
     if(e.key === 'ArrowLeft') lbPrev();
   });
-
+ 
+  // Hydrocooling carousel
+  const hcSlideEls = document.querySelectorAll('.hc-slide-full');
+  const hcDotsEl = document.getElementById('hcDots');
+  let hcIdx = 0;
+  hcSlideEls.forEach((_, i)=>{
+    const dot = document.createElement('span');
+    if(i===0) dot.classList.add('active');
+    dot.addEventListener('click', ()=> hcGoTo(i));
+    hcDotsEl.appendChild(dot);
+  });
+  function hcRender(){
+    hcSlideEls.forEach((s,i)=> s.classList.toggle('active', i===hcIdx));
+    hcDotsEl.querySelectorAll('span').forEach((d,i)=> d.classList.toggle('active', i===hcIdx));
+    const track = document.getElementById('hcSlides');
+    const activeSlide = hcSlideEls[hcIdx];
+    const viewport = track.parentElement;
+    const offset = activeSlide.offsetLeft - (viewport.offsetWidth - activeSlide.offsetWidth)/2;
+    track.style.transform = `translateX(-${offset}px)`;
+  }
+  function hcGoTo(i){ hcIdx = i; hcRender(); resetHcAuto(); }
+  function hcNext(){ hcIdx = (hcIdx+1) % hcSlideEls.length; hcRender(); resetHcAuto(); }
+  function hcPrev(){ hcIdx = (hcIdx-1+hcSlideEls.length) % hcSlideEls.length; hcRender(); resetHcAuto(); }
+  let hcAutoTimer = setInterval(hcNext, 4500);
+  function resetHcAuto(){ clearInterval(hcAutoTimer); hcAutoTimer = setInterval(hcNext, 4500); }
+  window.addEventListener('resize', hcRender);
+  setTimeout(hcRender, 100);
+  
   // reveal on scroll
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
