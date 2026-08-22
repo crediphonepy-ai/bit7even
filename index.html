@@ -184,41 +184,44 @@
   @media(min-width:1100px){ .svc-grid{grid-template-columns:repeat(4,1fr);} }
 
   /* ---------- COOLING (HYDROCOOLING CAROUSEL) ---------- */
-.cooling{padding-top:80px; padding-bottom:80px;}
-.hc-carousel{margin-top:36px; position:relative;}
-.hc-viewport{position:relative; width:100%; overflow:hidden; padding:0 15%;}
-.hc-track{display:flex; transition:transform .4s ease; align-items:center;}
-.hc-slide-full{
-  position:relative; flex-shrink:0; width:100%; aspect-ratio:16/9;
-  border-radius:16px; overflow:hidden; margin:0 10px;
-  opacity:0.4; transform:scale(0.8);
-  filter:grayscale(1) brightness(0.6);
-  transition:.4s ease all;
-  display:flex; align-items:center; justify-content:center; background:#F5F7F8;
-}
-.hc-slide-full.active{
-  opacity:1; transform:scale(1);
-  filter:grayscale(0) brightness(1);
-}
-.hc-slide-full img{width:100%; height:100%; object-fit:cover;}
-.hc-logo-slide{ filter:none !important; }
-.hc-logo-slide img{ object-fit:contain; padding:12%; }
-.hc-arrow{
-  position:absolute; top:50%; transform:translateY(-50%); z-index:6;
-  background:none; border:none; cursor:pointer; color:var(--text-dim);
-  padding:4px; transition:color .2s, transform .2s;
-}
-.hc-arrow:hover{color:var(--cyan-2);}
-.hc-prev{left:0;}
-.hc-next{right:0;}
-.hc-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
-.hc-dots span{width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer; transition:background .2s;}
-.hc-dots span.active{background:var(--cyan-2);}
-@media(max-width:900px){
-  .hc-viewport{padding:0;}
-  .hc-slide-full{opacity:1; transform:scale(1); filter:none;}
-  .hc-arrow{display:none;}
-}
+  .cooling{padding-top:80px; padding-bottom:80px;}
+  .hc-carousel{margin-top:36px; position:relative;}
+  .hc-viewport{position:relative; width:100%; overflow:hidden; border-radius:16px; border:1px solid var(--line);}
+  .hc-track{display:flex; transition:transform .5s ease;}
+  .hc-slide-full{
+    position:relative; flex:0 0 100%; width:100%; aspect-ratio:16/9;
+    display:flex; align-items:center; justify-content:center; background:#F5F7F8;
+  }
+  .hc-slide-full img{width:100%; height:100%; object-fit:cover;}
+  .hc-logo-slide img{ object-fit:contain; padding:12%; }
+  .hc-caption{
+    position:absolute; left:0; right:0; bottom:0; z-index:2;
+    padding:20px 24px; background:linear-gradient(180deg, transparent, rgba(0,0,0,0.82) 80%);
+    color:#fff; font-family:'Oswald',sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.03em; font-size:1.05rem;
+  }
+  .hc-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:6;
+    width:52px; height:52px; border-radius:50%;
+    background:rgba(5,7,8,0.55); border:1px solid var(--line); color:var(--text);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .hc-arrow:hover{color:var(--cyan-2); border-color:var(--cyan); background:rgba(5,7,8,0.8);}
+  .hc-prev{left:14px;}
+  .hc-next{right:14px;}
+  .hc-dots{display:flex; justify-content:center; gap:8px; margin-top:20px;}
+  .hc-dots span{width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer; transition:background .2s;}
+  .hc-dots span.active{background:var(--cyan-2);}
+  @media(min-width:900px){
+    .hc-carousel{padding:0 76px;}
+    .hc-prev{left:0;}
+    .hc-next{right:0;}
+  }
+  @media(max-width:640px){
+    .hc-caption{font-size:0.9rem; padding:16px 18px;}
+    .hc-arrow{width:44px; height:44px;}
+  }
 
    /* ---------- OPERACIÓN Y MONITOREO ---------- */
 .op-monitoreo{padding-top:80px; padding-bottom:80px;}
@@ -516,7 +519,7 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
 
   <div class="hc-carousel reveal">
     <button class="hc-arrow hc-prev" onclick="hcPrev()" aria-label="Anterior">
-      <svg width="24" height="38" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4 6 20l14 16"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4 6 12l9 8"/></svg>
     </button>
 
     <div class="hc-viewport">
@@ -526,18 +529,21 @@ footer .foot-grid, footer .foot-bottom{ position:relative; z-index:1; }
         </div>
         <div class="hc-slide-full">
           <img src="formulacion-hydrocooling-bit7even.jpg" alt="Formulación especializada de hydrocooling">
+          <div class="hc-caption" data-i18n="hc1_cap">Formulación especializada</div>
         </div>
         <div class="hc-slide-full">
           <img src="suministro-hydrocooling-bit7even.jpg" alt="Suministro a medida de hydrocooling">
+          <div class="hc-caption" data-i18n="hc2_cap">Suministro a medida</div>
         </div>
         <div class="hc-slide-full">
           <img src="monitoreo-hydrocooling-bit7even.jpg" alt="Monitoreo continuo de hydrocooling">
+          <div class="hc-caption" data-i18n="hc3_cap">Monitoreo continuo</div>
         </div>
       </div>
     </div>
 
     <button class="hc-arrow hc-next" onclick="hcNext()" aria-label="Siguiente">
-      <svg width="24" height="38" viewBox="0 0 24 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l14 16-14 16"/></svg>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l9 8-9 8"/></svg>
     </button>
   </div>
 
@@ -726,8 +732,9 @@ function lbPrev(){
     if(e.key === 'ArrowLeft') lbPrev();
   });
  
-  // Hydrocooling carousel
+  // Hydrocooling carousel — swipe simple (1 slide = 100% del viewport), sin efecto peek/grises
   const hcSlideEls = document.querySelectorAll('.hc-slide-full');
+  const hcTrack = document.getElementById('hcSlides');
   const hcDotsEl = document.getElementById('hcDots');
   let hcIdx = 0;
   hcSlideEls.forEach((_, i)=>{
@@ -739,19 +746,24 @@ function lbPrev(){
   function hcRender(){
     hcSlideEls.forEach((s,i)=> s.classList.toggle('active', i===hcIdx));
     hcDotsEl.querySelectorAll('span').forEach((d,i)=> d.classList.toggle('active', i===hcIdx));
-    const track = document.getElementById('hcSlides');
-    const activeSlide = hcSlideEls[hcIdx];
-    const viewport = track.parentElement;
-    const offset = activeSlide.offsetLeft - (viewport.offsetWidth - activeSlide.offsetWidth)/2;
-    track.style.transform = `translateX(-${offset}px)`;
+    hcTrack.style.transform = `translateX(-${hcIdx * 100}%)`;
   }
   function hcGoTo(i){ hcIdx = i; hcRender(); resetHcAuto(); }
   function hcNext(){ hcIdx = (hcIdx+1) % hcSlideEls.length; hcRender(); resetHcAuto(); }
   function hcPrev(){ hcIdx = (hcIdx-1+hcSlideEls.length) % hcSlideEls.length; hcRender(); resetHcAuto(); }
   let hcAutoTimer = setInterval(hcNext, 4500);
   function resetHcAuto(){ clearInterval(hcAutoTimer); hcAutoTimer = setInterval(hcNext, 4500); }
-  window.addEventListener('resize', hcRender);
-  setTimeout(hcRender, 100);
+
+  // Swipe táctil (mobile) sobre el viewport
+  const hcViewportEl = document.querySelector('.hc-viewport');
+  let hcTouchStartX = 0, hcTouchDeltaX = 0;
+  hcViewportEl.addEventListener('touchstart', (e)=>{ hcTouchStartX = e.touches[0].clientX; hcTouchDeltaX = 0; }, {passive:true});
+  hcViewportEl.addEventListener('touchmove', (e)=>{ hcTouchDeltaX = e.touches[0].clientX - hcTouchStartX; }, {passive:true});
+  hcViewportEl.addEventListener('touchend', ()=>{
+    if(Math.abs(hcTouchDeltaX) > 40){ hcTouchDeltaX < 0 ? hcNext() : hcPrev(); }
+  });
+
+  hcRender();
   
   // reveal on scroll
   const items = document.querySelectorAll('.reveal');
@@ -844,6 +856,7 @@ function lbPrev(){
       hc_eyebrow:"BIT7 Cooling", 
       hc_title:"Soluciones en gestión de enfriamiento líquido adaptadas a cada sistema y sector",
       hc_p:"BIT7 Cooling desarrolla y suministra agua grado industrial bajo especificaciones controladas, conforme a los requerimientos específicos de cada sector.",
+      hc1_cap:"Formulación especializada", hc2_cap:"Suministro a medida", hc3_cap:"Monitoreo continuo",
       contact_eyebrow:"Contacto", contact_title:"Solicitá una Asesoría Técnica",
       contact_p:"Contanos tu proyecto. Te respondemos con una propuesta técnica a la brevedad.",
       form_nombre:"Nombre *", form_email:"Email *", form_tel:"Teléfono", form_msg:"Mensaje *", form_btn:"Solicitar Asesoría",
@@ -882,6 +895,7 @@ function lbPrev(){
       hc_eyebrow:"BIT7 Cooling", 
       hc_title:"Liquid cooling management solutions tailored to each system and sector",
       hc_p:"BIT7 Cooling develops and supplies industrial-grade water under controlled specifications, tailored to the specific requirements of each sector.",
+      hc1_cap:"Specialized formulation", hc2_cap:"Tailored supply", hc3_cap:"Continuous monitoring",
       contact_eyebrow:"Contact", contact_title:"Request a Technical Consultation",
       contact_p:"Tell us about your project. We'll get back to you promptly with a technical proposal.",
       form_nombre:"Name *", form_email:"Email *", form_tel:"Phone", form_msg:"Message *", form_btn:"Request a Consultation",
